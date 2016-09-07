@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>字符串解构</title>
+	</head>
+	<body>
+		<script>
+			//利用了字符串可以用数组的方式获取每个字符。
+			let[a,b]="he";
+			alert(a+" "+b);
+			
+			//利用了字符串也有对象的部分功能属性。获取字符串长度,"hello"下有length属性
+			let{length:len}="hello";
+			alert(len);
+			
+			//对象赋值的利用
+/*			let{toString:s1}=2;
+			let{toString:s2}=true;
+			var z=20;
+			alert(s1+" "+s2);*/
+
+			
+		</script>
+	</body>
+</html>

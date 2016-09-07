@@ -1,0 +1,178 @@
+   <!DOCTYPE html>
+   <html>
+       <meta charset="utf-8"/>
+       <head>
+           <title>杜少发明的计算器</title>
+           
+   <style type="text/css">
+   		input,td,tr{margin:0;padding: 0;}
+		table{border-collapse: collapse;}
+		input:hover{background:#eee;}
+		td{background: red;}
+   </style>
+   
+   <script type="text/javascript">
+     var numresult;
+ 	 var str;
+  
+   function onclicknum(nums) {
+       str = document.getElementById("nummessege");
+       str.value = str.value + nums;
+
+   }
+   function onclickCheck(nums){
+		str = document.getElementById("nummessege").value;  
+		if(str!="")
+		{
+			if(str.substring(str.length-1,str.length)!="+"&&str.substring(str.length-1,str.length)!="-"&&str.substring(str.length-1,str.length)!="*"&&str.substring(str.length-1,str.length)!="/"&&str.substring(str.length-1,str.length)!=".")
+			{
+				document.getElementById("nummessege").value+=nums;
+			}
+		}
+   }
+   function onclickPoint(nums){
+	    str = document.getElementById("nummessege").value;
+		if(str!="")
+		{
+			if(   str.substring(str.length-1,str.length)!="+"&&str.substring(str.length-1,str.length)!="-"&&str.substring(str.length-1,str.length)!="*"&&str.substring(str.length-1,str.length)!="/"  )
+			{
+				if(str.lastIndexOf(".")<=str.lastIndexOf("+")||str.lastIndexOf(".")<=str.lastIndexOf("-")||str.lastIndexOf(".")<=str.lastIndexOf("*")||str.lastIndexOf(".")<=str.lastIndexOf("/"))
+				{
+				document.getElementById("nummessege").value+=nums;
+				}
+			}
+		}
+   }
+	 function onclickclear() {
+      	str = document.getElementById("nummessege");
+        str.value = "";
+   }
+ 
+    function onclickresult() {
+        str = document.getElementById("nummessege");
+        numresult = eval(str.value);
+        str.value = numresult;
+      }
+	function onclickDel(){
+		var str1;
+		var str2;
+		str1 = document.getElementById("nummessege").value;
+		str2=str1.substring(0,str1.length-1);
+		document.getElementById("nummessege").value = str2;
+	}
+ </script>
+
+    </head>
+
+    <body bgcolor="#aff" >
+        <table border="0" align="center">
+            <tr>
+                <td colspan="4">
+                    <input type="text" id="nummessege"
+                        style="height: 90px; width: 360px; font-size: 50px" readonly="readonly"/>
+                  </td>
+            </tr>
+            <tr>
+                  <td>
+                      <input type="button" value="1" id="1" onclick="onclicknum(1)"
+                          style="height: 70px; width: 91px; font-size: 35px">
+                  </td>
+ 
+                  <td>
+                      <input type="button" value="2" id="2" onclick="onclicknum(2)"
+                          style="height: 70px; width: 91px; font-size: 35px">
+                  </td>
+  
+                  <td>
+                      <input type="button" value="3" id="3" onclick="onclicknum(3)"
+                          style="height: 70px; width: 91px; font-size: 35px">
+               </td>
+
+                <td>
+                    <input type="button" value="+" id="add" onclick="onclickCheck('+')"
+                        style="height: 70px; width: 91px; font-size: 35px">
+                </td>
+            </tr>
+ 
+            <tr>
+               <td>
+                   <input type="button" value="4" id="4" onclick="onclicknum(4)"
+                       style="height: 70px; width: 91px; font-size: 35px">
+               </td>
+
+                <td>
+                    <input type="button" value="5" id="5" onclick="onclicknum(5)"
+                         style="height: 70px; width: 91px; font-size: 35px">
+                 </td>
+
+                 <td>
+                    <input type="button" value="6" id="6" onclick="onclicknum(6)"
+                        style="height: 70px; width: 91px; font-size: 35px">
+                </td>
+ 
+                <td>
+                    <input type="button" value="-" id="sub" onclick="onclickCheck('-')"
+                         style="height: 70px; width: 91px; font-size: 35px">
+                 </td>
+            </tr>
+ 
+			<tr>
+                <td>
+                    <input type="button" value="7" id="7" onclick="onclicknum(7)"
+                        style="height: 70px; width: 91px; font-size: 35px">
+                </td>
+
+                <td>
+                    <input type="button" value="8" id="8" onclick="onclicknum(8)"
+                        style="height: 70px; width: 91px; font-size: 35px">
+                </td>
+
+                <td>
+                    <input type="button" value="9" id="9" onclick="onclicknum(9)"
+                         style="height: 70px; width: 91px; font-size: 35px">
+                </td>
+ 
+                <td>
+                    <input type="button" value="*" id="mul" onclick="onclickCheck('*')"
+                        style="height: 70px; width: 91px; font-size: 35px">
+                </td>
+            </tr>
+ 
+            <tr>
+                <td colspan="2">
+                     <input type="button" value="0" id="0" onclick="onclicknum(0)"
+                         style="height: 70px; width:182px; font-size: 35px">
+                 </td>
+                 <td>
+                     <input type="button" value="." id="point" onclick="onclickPoint('.')"
+                         style="height: 70px; width: 91px; font-size: 35px">
+                 </td>
+                <td>
+                    <input type="button" value="/" id="division"
+                         onclick="onclickCheck('/')"
+                         style="height: 70px; width: 91px; font-size: 35px">
+                 </td>
+            </tr>
+ 
+            <tr>
+ 
+                 <td colspan="2">
+                     <input type="button" value="AC" id="clear"
+                        onclick="onclickclear()"
+                         style="height: 70px; width: 182px; font-size: 35px" />
+                </td>
+
+                <td >
+                   <input type="button" value="DEL" id="del"
+                        onclick="onclickDel()"
+                         style="height: 70px; width: 91px; font-size: 35px" />
+                </td>
+                <td >
+                   <input type="button" value="=" id="result"
+                        onclick="onclickresult()"
+                         style="height: 70px; width: 91px; font-size: 35px" />
+                </td>
+			</tr>
+ 		 </table>
+  </body>
+ </html>

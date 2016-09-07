@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		体重：<input type="text" id="tizhong" />公斤（kg）<br />
+		身高：<input type="text" id="shengao"/>厘米（cm）<br />
+		<input type="button" onclick="calcute()" value="进行计算"/>
+		<script>
+			function calcute(){
+				var tizhong=(parseFloat(document.getElementById("shengao").value)-108)*0.9;
+				var sum=parseFloat(document.getElementById("tizhong").value)-tizhong;
+				alert(sum);
+				if(sum<=5&&sum>=-5){
+					document.write("标准");
+				}
+				else if(sum>5){
+					document.write("超重");
+				}
+				else{
+					document.write("太轻");
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>模拟网页微信</title>
+		<style>
+			*{padding: 0;margin: 0;}
+			body{font-family: "微软雅黑";}
+			#div{width: 600px;height: 800px;background: #eee;border: 2px solid #333;margin: 30px auto 0;}
+			#divTop{width: 600px;height: 50px;background: #000;text-align: center;font-size: 30px;line-height: 50px;color: #fff;}
+			#divCenter{width: 600px;height: 670px;overflow: hidden;}
+			#divBottom{width: 545px;height: 50px;background: #fff;padding: 15px 5px 15px 50px;}
+			#txt{background: #CBCBCB;width: 440px;height: 46px;float: left;color: #000;font-size: 24px;font-weight: bold;}
+			#btn{background: #352A2A;color: #fff;font-size: 24px;width: 80px;height: 50px;border: 2px solid #ccc;float: right;}
+			p{text-align: right;margin: 13px;}
+			a{background: #B8D45D;line-height: 60px;font-size: 30px;padding: 10px;}
+		</style>
+	</head>
+	<body>
+		<div id="div">
+			<div id="divTop">微信</div>
+			<div id="divCenter"></div>
+			<div id="divBottom">
+				<input type="text" id="txt" />
+				<input type="button" value="发送" id="btn"/>
+			</div>
+		</div>
+		
+		<script>
+			var divCenter=document.getElementById("divCenter");
+			var txt=document.getElementById("txt");
+			var btn=document.getElementById("btn");
+			var count=0;
+			btn.onclick=function(){
+				var txtValue=txt.value;
+				if(txtValue=="")
+					alert("请输入你要发送的内容!");
+				else{
+					if(count>=9&&count!=0)
+						divCenter.removeChild(divCenter.firstChild);
+					var pNew=document.createElement("p");
+					var pValue=divCenter.appendChild(pNew);
+					var aNew=document.createElement("a")
+					var aValue=pValue.appendChild(aNew);
+					aValue.innerHTML=txtValue;
+					count++;
+				}
+				txt.value="";
+			}
+			
+		</script>
+		
+	</body>
+</html>

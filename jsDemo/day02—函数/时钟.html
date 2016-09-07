@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>js时钟</title>
+</head>
+<body>
+
+    <script>
+        function getTime(){
+            var d=new Date();
+            var year= d.getFullYear();
+            var month= d.getMonth()+1;
+            var date= d.getDate();
+            var hour=d.getHours();
+            var mintue= d.getMinutes();
+            var second= d.getSeconds();
+            console.log(d.toString());
+            console.log(Date.now());    //IE不支持
+            console.log(Date.parse('2014/12/25 12:00:00'));
+            document.body.innerHTML="";
+            document.write("现在的时间是:北京时间"+year+"年"+month+"月"+date+"日"+hour+"时"+mintue+"分"+second+"秒");
+
+        }
+        getTime();
+       	setInterval(getTime,1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>二级菜单不隐藏</title>
+		<style>
+			*{margin: 0;padding: 0;}
+			li{list-style: none;width: 196px;height: 28px;border: 1px solid #FF0000;line-height: 28px;background: blue;text-align: center;}
+			li a{color: #fff;text-decoration: none;}
+			div{position: absolute;top:0px;left: 200px;display: none;}
+		</style>
+	</head>
+	<body>
+		<ul id="ul">
+			<li><a href="#">千锋首页</a></li>
+			<li><a href="#">走进千锋</a></li>
+		</ul>
+		<div id="div">
+			<ul>
+				<li><a href="#">千锋首页</a></li>
+				<li><a href="#">走进千锋</a></li>
+				<li><a href="#">千锋首页</a></li>
+				<li><a href="#">走进千锋</a></li>
+			</ul>
+		</div>
+		
+		<script>
+			var ul=document.getElementById("ul");
+			for(var i=0;i<ul.children.length;i++){
+				ul.children[i].index=i;
+				ul.children[i].onmouseover=function(){
+					div.style.display="block";
+				}
+				ul.children[i].onmouseout=function(){
+					div.style.display="none";
+				}
+			}
+			div.onmouseover=function(){
+				div.style.display="block";
+			}
+			div.onmouseout=function(){
+				div.style.display="none";
+			}
+		</script>
+		
+	</body>
+</html>

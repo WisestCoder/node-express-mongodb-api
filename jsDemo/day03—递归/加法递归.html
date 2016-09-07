@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>加法递归</title>
+</head>
+<body>
+<script>
+    function add(n){
+        if(n==1){
+            return 1;
+        }
+        else{
+            return 1/n+add(n-1);
+        }
+    }
+    function sub(n){
+        if(n==1){
+            return 1;
+        }
+        else{
+            return (-1/n)+sub(n-1);
+        }
+    }
+    document.write(sub(3)+"<br />");
+    document.write(add(100)+"<br />");
+</script>
+</body>
+</html>

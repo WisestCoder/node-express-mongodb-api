@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <style type="text/css">
+        *{margin:0; padding: 0; font-size: 14px; font-family: 微软雅黑;}
+        ul li{list-style:none;}
+        .clear{clear: left;}
+        #products{
+            width: 1100px;
+            margin: 10px auto;
+        }
+        #products li{
+            width:260px;
+            float: left;
+            border:solid 1px #E9E9E9;
+            margin-right:10px;
+        }
+        #products li span{
+            display: block;
+            width: 100%;
+            text-align:center;
+        }
+        #products li em{
+            font-size:24px;
+            font-family: Arial;
+            color:#E4393C;
+            display: block;
+            margin-left: 20px;
+        }
+        #products li p{
+            color:#333;
+            margin: 10px 0 0 20px;
+        }
+        #products li a{
+            display: block;
+            width: 120px;
+            height: 30px;
+            line-height: 30px;
+            border: solid 1px #DDDDDD;
+            text-align: center;
+            margin: 20px auto;
+            text-decoration: none;
+            color:#E4393C;
+        }
+        #products li a:hover{
+            border: solid 1px #E4393C;
+        }
+        .shopcart{
+            width:1100px;
+            margin: 50px auto;
+        }
+        .shopcart h1{
+            font-size:18px;
+            color:#E4393C;
+            border-bottom:solid 4px #E9E9E9;
+            padding-bottom: 10px;
+        }
+        .shopcart .list-head{
+            width: 96%;
+            background: #F3F3F3;
+            height: 40px;
+            line-height: 40px;
+            padding:0 2% 0 2%;
+        }
+        .shopcart .list-head div{
+            float:left;
+        }
+        .h1,.c1{width: 40%;}
+        .h2,.c2{width: 20%;}
+        .h3,.c3{width: 20%; }
+        #cart-list .pl{
+            width: 100%;
+            height: 94px;
+            border-bottom:solid 1px #C5C5C5;
+            clear: left;
+        }
+        #cart-list .pl div{
+            float: left;
+            height: 94px;
+            line-height: 94px;
+            background: #FFF4E8;
+        }
+        #cart-list div span{
+            display: block;
+            float: left;
+            padding: 5px 0 0 20px;
+        }
+        #cart-list div p{
+            float: left;
+            padding-left: 20px;
+        }
+        #cart-list div span img{
+            width:80px;
+        }
+        .pl a{
+            color:#666;
+            text-decoration: none;
+        }
+        .pl a:hover{
+            color:#ff0000;
+            text-decoration: underline;
+        }
+    </style>
+    <script src="js/cookie.js"></script>
+</head>
+<body>
+<div id="products">
+    <ul id="ullist">
+        <li>
+            <span><img src="img/1.jpg"></span>
+            <em>&yen;2999</em>
+            <p>乐视超级电视 S50</p>
+            <a href="javascript:;">加入购物车</a>
+        </li>
+        <li>
+            <span><img src="img/2.jpg"></span>
+            <em>&yen;3999</em>
+            <p>乐视超级电视 S60</p>
+            <a href="javascript:;">加入购物车</a>
+        </li>
+        <li>
+            <span><img src="img/3.jpg"></span>
+            <em>&yen;4999</em>
+            <p>乐视超级电视 S70</p>
+            <a href="javascript:;">加入购物车</a>
+        </li>
+        <li>
+            <span><img src="img/4.jpg"></span>
+            <em>&yen;5999</em>
+            <p>乐视超级电视 S80</p>
+            <a href="javascript:;">加入购物车</a>
+        </li>
+    </ul>
+</div>
+<div class="clear"></div>
+<div class="shopcart">
+    <h1>全部商品</h1><p id="totalCount">0</p>
+    <div class="list-head">
+        <div class="h1">商品名称</div>
+        <div class="h2">价格</div>
+        <div class="h2">数量</div>
+        <div class="h3">操作</div>
+    </div>
+    <div id="cart-list">
+       <!-- <div class="pl">
+            <div class="c1">
+                <span><img src="img/1.jpg"></span>
+                <p>乐视超级电视 S50</p>
+            </div>
+            <div class="c2">&yen;1000</div>
+            <div class="c2"><input>1</div>
+            <div class="c3"><a href="#">删除</a></div>
+        </div>-->
+    </div>
+</div>
+<script>
+window.onload= function () {
+    var oUl=document.getElementById("ullist");
+    var oLis=oUl.children;  //li
+    for(var i=0;i<oLis.length;i++){
+        oLis[i].onclick=function(){
+            var productInfo=new Object();
+            productInfo.img=this.children[0].innerHTML;
+            productInfo.price=this.children[1].innerHTML.substr(1);
+            productInfo.name=this.children[2].innerHTML;
+            productInfo.totalPrice=productInfo.price;
+            productInfo.count=1;
+            var products=getCookie("cartcookie"); // "lslslsl";
+            var arrProducts=[]; //存储所有的商品在此arr中
+            if(products.length>0){
+                //购物车里有旧数据。
+                arrProducts=JSON.parse(products);//[1];
+            }
+
+            var flag=false;
+            //arrProducts 这个数组里面 看看有没有一个数组元素 跟productInfo 一样
+            for(var j=0;j<arrProducts.length;j++){
+                //比如商品名称相等 就算是同一个商品。
+                if(arrProducts[j].name==productInfo.name){
+                    arrProducts[j].count+=1;
+                    arrProducts[j].totalPrice=parseInt(arrProducts[j].price)*arrProducts[j].count;
+                    //arrProducts[j].changeCount(1);
+                    flag=true;
+                }
+            }
+
+            if(!flag){
+                arrProducts.push(productInfo);// 2,[productInfo,productInfo]
+            }
+            //存储到cookie中
+            var strProInfo=JSON.stringify(arrProducts); //json对象转化为string；
+            setCookie("cartcookie",strProInfo,30);//1 ,
+
+            var carlist=document.getElementById("cart-list");
+            carlist.innerHTML="";
+            InitCart(arrProducts);
+        }
+    }
+    //页面加载完成 ，读取cookie。病渲染到页面。
+    var strCookie=getCookie("cartcookie");//string
+    if(strCookie.length>0){
+        //在购物车中显示出来；
+        var arrProducts=JSON.parse(strCookie); //string to object  //条件的， string 必须是一个遵循json格式的string
+        InitCart(arrProducts);
+    }
+}
+    function deleteProduct(dom){
+        //dom 我点是哪个 a标签
+        var  productName=dom.parentNode.parentNode.children[0].children[1].innerHTML;
+        dom.parentNode.parentNode.parentNode.removeChild(dom.parentNode.parentNode);
+        //删除cookie
+        var strCookie=getCookie("cartcookie");
+        if(strCookie.length>0){
+            var arrCookie=JSON.parse(strCookie);
+            //找到要删除的元素
+            for(var i=0;i<arrCookie.length;i++){
+                if(arrCookie[i].name==productName){
+                    arrCookie.splice(i,1);//从下标i开始， 删除 1个元素  仅仅是把数组arrCookie 删除了一个对象的商品！
+                    //cookie 还是原来。
+                }
+            }
+        }
+        //更新cookie
+        var strCookieNew=JSON.stringify(arrCookie);
+        setCookie("cartcookie",strCookieNew,30);
+    }
+
+   /* function jia(dom){
+        changeCount(dom,1);
+    }
+    function jian(dom){
+        changeCount(dom,-1);
+    }*/
+    //第二个参数，是代表数量的变化值；
+    function changeCount(dom,count){
+        var  productName=dom.parentNode.parentNode.children[0].children[1].innerHTML;
+        //1.页面显示数字要 加1
+        //2.cookie 中找到对应的商品，让商品的数量加1；
+        //1. 找到cookie中对应的商品。让商品的数量加1；
+        //2.根据cookie 重新加在购物车。
+        var strCookie=getCookie("cartcookie");
+        if(strCookie.length>0){
+            var arrCookie=JSON.parse(strCookie);
+            for(var i=0;i<arrCookie.length;i++){
+                if(arrCookie[i].name==productName){
+                    //arrCookie[i].changeCount(count);
+                    arrCookie[i].count=arrCookie[i].count+count;
+                    arrCookie[i].totalPrice=parseInt(arrCookie[i].price)*arrCookie[i].count;
+                    if(arrCookie[i].count==0){
+                        arrCookie.splice(i,1);
+                    }
+                    break;
+                }
+            }
+            var strCookieNew=JSON.stringify(arrCookie);
+            setCookie("cartcookie",strCookieNew,30);
+        }
+        var cartList=document.getElementById("cart-list");
+        cartList.innerHTML="";
+        InitCart(arrCookie);
+    }
+    //通过商品信息，在购物车中渲染一条记录；
+    function showProduct(productInfo){
+        /* var html= "<div class=\"pl\">";
+         html+="<div class=\"c1\">";
+         html+="<span>"+productInfo.img+"</span>";
+         html+="<p>"+productInfo.name+"</p>";
+         html+="</div>"
+         html+="<div class=\"c2\">"+productInfo.price+"</div>";
+         html+="<div class=\"c2\">1</div>";
+         html+="<div class=\"c3\"><a href=\"#\">删除</a></div> </div>";
+         var carlist=document.getElementById("cart-list");
+         carlist.innerHTML+=html;*/
+        //var totalPrice=parseInt(productInfo.price)*productInfo.count;
+        var html="<div class=\"pl\"><div class=\"c1\"><span>"+productInfo.img+"</span>";
+        html+="<p>"+productInfo.name+"</p></div><div class=\"c2\">"+productInfo.totalPrice+"</div><div class=\"c2\"><input type='button' value='-' onclick='changeCount(this,-1)'/>"+productInfo.count+"<input type='button' value='+' onclick='changeCount(this,1)'/></div>";
+        html+="<div class=\"c3\"><a class='deletebt' href=\"#\" onclick='deleteProduct(this)'>删除</a></div> </div>";
+        var carlist=document.getElementById("cart-list");
+        carlist.innerHTML+=html;
+    }
+    function InitCart(arrCookie){
+        var totalCount=0;
+        for(var i=0;i<arrCookie.length;i++){
+            totalCount+=arrCookie[i].count;
+            showProduct(arrCookie[i]);
+        }
+        var oPTotalCount=document.getElementById("totalCount");
+        oPTotalCount.innerHTML=totalCount;
+    }
+</script>
+<!--<script>
+    var ul=document.getElementById("ullist");
+    var lis=ul.children;
+    for(var i=0;i<lis.length;i++){
+        lis[i].onclick=function(){
+            //获取点击的li ，都是那个商品，并获取商品的属性。
+            var productInfo=new Object();
+            productInfo.price=this.children[1].innerHTML;
+            productInfo.name=this.children[2].innerHTML;
+            productInfo.imgsrc=this.children[0].innerHTML;
+            // 要加在到下面的购物车中；
+            showProduct(productInfo);
+            setCarCookie(productInfo);
+        }
+    }
+
+    // 如果cookie加上！
+    function setCarCookie(productinfo){
+        var jsonStr=JSON.stringify(productinfo);
+        setCookie("catcookie",jsonStr,30);
+    }
+
+    function getCarCookie(){
+        var carcookies=getCookie("catcookie"); //string
+        var oJsonCookie=JSON.parse(carcookies);  //对象
+        return oJsonCookie;
+    }
+
+    //页面加在时；或去cookie 并在页面显示出来
+    var cookieProductInfo=getCarCookie();
+    showProduct(cookieProductInfo);
+    function showProduct(productInfo){
+        var html= "<div class=\"pl\">";
+        html+="<div class=\"c1\">";
+        html+="<span>"+productInfo.imgsrc+"</span>";
+        html+="<p>"+productInfo.name+"</p>";
+        html+="</div>"
+        html+="<div class=\"c2\">"+productInfo.price+"</div>";
+        html+="<div class=\"c2\">1</div>";
+        html+="<div class=\"c3\"><a href=\"#\">删除</a></div> </div>";
+        var carlist=document.getElementById("cart-list");
+        carlist.innerHTML+=html;
+    }
+    /*function showProductEx(productInfo){
+
+        var html= "<div class=\"pl\">";
+        html+="<div class=\"c1\">";
+        html+="<span>"+productInfo.imgsrc+"</span>";
+        html+="<p>"+productInfo.name+"</p>";
+        html+="</div>"
+        html+="<div class=\"c2\">"+productInfo.price+"</div>";
+        html+="<div class=\"c2\">1</div>";
+        html+="<div class=\"c3\"><a href=\"#\">删除</a></div> </div>";
+        var carlist=document.getElementById("cart-list");
+        carlist.innerHTML+=html;
+    }*/
+</script>-->
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>鼠标指针坐标</title>
+		<style>
+			div{width: 400px;height: 400px;background: red;}
+			p{height: 30px;}
+		</style>
+		<script src="eventList.js"></script>
+	</head>
+	<body>
+		<p id="p1"></p>
+		<p id="p2"></p>
+		<p id="p3"></p>
+		<p id="p4"></p>
+		<p id="p5"></p>
+		<div id="div"></div>
+		<script>
+			var p1=document.getElementById("p1");
+			var p2=document.getElementById("p2");
+			var p3=document.getElementById("p3");
+			var p4=document.getElementById("p4");
+			var p5=document.getElementById("p5");
+			var div=document.getElementById("div");
+			
+			document.onmousemove=function(event){
+				var event=eventUtil.getEvent(event);
+				//参照物为浏览器窗口,所有浏览器都支持
+				p1.innerHTML="clientX: "+event.clientX+"; clientY: "+event.clientY;
+				
+				//参照物为屏幕
+				p2.innerHTML="screenX: "+event.screenX+"; screenY: "+event.screenY;
+				
+				//offsetX 与 offsetY属性可以获得事件源对象的偏移量，也就是元素的相对
+				//坐标,参照物是本身DOM对象的左上角
+				p3.innerHTML="offsetX: "+event.offsetX+"; offsetY: "+event.offsetY;
+				
+				//当页面没有滚动条的情况下，pageX与pageY的值与clientX与clientY的值相等。
+				//并且IE8及更早版本不支持该属性
+				p4.innerHTML="pageX: "+event.pageX+"; pageY: "+event.pageY;
+			}
+			div.onmousemove=function(event){
+				var event=eventUtil.getEvent(event);
+				p5.innerHTML="offsetX: "+event.offsetX+"; offsetY: "+event.offsetY;
+			}
+			
+		</script>
+	</body>
+</html>

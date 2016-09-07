@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>鼠标移动小动画</title>
+	</head>
+	<body>
+		
+		
+		<script>
+				var oDiv=[];
+				var n=20;
+				for(var i=0;i<n;i++){
+					oDiv[i]=document.createElement("div");
+					document.body.appendChild(oDiv[i]);
+					oDiv[i].style.position="absolute";
+					oDiv[i].style.width="5px";
+					oDiv[i].style.height="5px";
+					oDiv[i].style.background="red";
+				}
+			document.onmousemove=function(e){
+				var e=e||window.event;
+				
+				oDiv[0].style.top=e.clientY+"px";
+				oDiv[0].style.left=e.clientX+"px";
+				
+				for(var i=n-1;i>0;i--){
+					oDiv[i].style.top=oDiv[i-1].style.top;
+					oDiv[i].style.left=oDiv[i-1].style.left;
+				}
+			}
+		</script>
+		
+	</body>
+</html>

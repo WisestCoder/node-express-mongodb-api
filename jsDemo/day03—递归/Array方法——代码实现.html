@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Array方法——代码实现</title>
+	</head>
+	<body>
+		<script>
+			var arr=[1,2,5,4,98];
+//			//push方法代码实现
+//			function pushNew(arr,i){
+//				arr[arr.length]=i;
+//			}
+//			pushNew(arr,10);alert(arr);
+//			alert(arr);
+			
+//			//shift方法代码实现
+//			function shiftNew(arr){
+//				for(var k=0;k<arr.length-1;k++){
+//					arr[k]=arr[k+1];
+//				}
+//				arr.length-=1;
+//			}
+//			shiftNew(arr);
+//			alert(arr);
+
+//			//splice方法代码实现
+//			function spliceNew(arr,i1,i2){
+//				for(var k=i1;k<arr.length-i2;k++){
+//					arr[k]=arr[k+i2];
+//				}
+//				arr.length-=i2;
+//				alert(arr);
+//				var len=arr.length;
+//				for(var j=len-1;j>=i1;j--){
+//					arr[j+arguments.length-3]=arr[j];
+//				}
+//				alert(arr);
+//				for(var l=i1;l<i1+arguments.length-3;l++){
+//					arr[l]=arguments[l+3-i1];
+//				}
+//			}
+//			spliceNew(arr,1,1,5,6,7);
+//			alert(arr);
+
+//			//concat方法代码实现
+//			function concatNew(arr,arr2){
+//				var arrNew=arr;
+//				var len=arr.length;
+//				var len2=arr2.length;
+//				for(var i=len;i<len+len2;i++){
+//					arrNew[i]=arr2[i-len];
+//				}
+//				return arrNew;
+//			}
+//			var arr2=["7","3","2"];
+//			alert(concatNew(arr,arr2));
+			
+			//slice方法代码实现
+			function sliceNew(arr,i1,i2){
+				var len=arr.length;
+				if(i1<0)
+					i1+=len;
+				if(i2<0)
+					i2+=len;
+				if(i1<i2){
+					for(var i=0;i<len-i1;i++){
+						arr[i]=arr[i+i1];
+					}
+					arr.length-=i1;
+					arr.length-=(len-i2);	
+				}
+				else
+					arr.length=0;
+				
+			}
+			sliceNew(arr,2,1);
+			alert(arr);
+			
+		</script>
+	</body>
+</html>

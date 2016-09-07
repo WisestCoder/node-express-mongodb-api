@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var ran1=Math.floor(Math.random()*101);//0-100
+			var ran2=Math.floor(Math.random()*101)+100;//100-200
+			var ran3=Math.floor(Math.random()*100)+1;//1-100
+			console.log("随机数0-100: "+ran1);
+			console.log("随机数1-100: "+ran3);
+			console.log("随机数100-200: "+ran2);
+			console.log("随机数100-400: "+fn1());
+			
+			
+			function fn(){
+				var ran=Math.floor(Math.random()*301)+100;//100-400
+				console.log(ran);
+				if(ran<200)
+					return 200;
+				else if(ran>300)
+					return 300;
+				else
+					return ran;
+			}
+			function fn1(){
+				var ran=(Math.random()*300)+100;//100-400
+				console.log(ran);
+				return Math.min(Math.max(200,Math.floor(ran)),300);
+			}
+		</script>
+	</body>
+</html>

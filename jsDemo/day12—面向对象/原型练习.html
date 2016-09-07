@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原型练习</title>
+	</head>
+	<body>
+		<script>
+			function foo(){
+		        get = function(){
+		            console.log(1);
+		        };
+		        return this;
+		    }
+		    foo.get = function(){
+		        console.log(2);
+		    };
+		    foo.prototype.get = function(){
+		        console.log(3);
+		    };
+		    var get = function(){
+		        console.log(4);
+		    };
+		    function get(){
+		        console.log(5);
+		    }
+		    foo.get();   //2
+		    get();   //4   因为5会提升，4将覆盖5
+		    foo().get();   //1  先执行foo()里面的代码,返回this指向windows,最后执行get(),1中get()方法覆盖
+		    get();	//1
+		    new foo.get();	//2  先执行foo.get(),结果为2,然后执行new,返回结果还是2
+		    new foo().get();   //3  先执行new foo(),然后执行get(),返回结果为3
+		    new new foo().get();   //3  先执行new foo(),然后执行get(),返回结果为3,最后执行new,返回结果还是3
+		</script>
+	</body>
+</html>

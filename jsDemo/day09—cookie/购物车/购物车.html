@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <style type="text/css">
+        *{margin:0; padding: 0; font-size: 14px; font-family: 微软雅黑;}
+        ul li{list-style:none;}
+        i,em{font-style: normal;}
+        .clear{clear: left;}
+        #products{
+            width: 1100px;
+            margin: 10px auto;
+        }
+        #products li{
+            width:260px;
+            float: left;
+            border:solid 1px #E9E9E9;
+            margin-right:10px;
+        }
+        #products li span{
+            display: block;
+            width: 100%;
+            text-align:center;
+        }
+        #products li em{
+            font-size:24px;
+            font-family: Arial;
+            color:#E4393C;
+            display: block;
+            margin-left: 20px;
+        }
+        #products li p{
+            color:#333;
+            margin: 10px 0 0 20px;
+        }
+        #products li a{
+            display: block;
+            width: 120px;
+            height: 30px;
+            line-height: 30px;
+            border: solid 1px #DDDDDD;
+            text-align: center;
+            margin: 20px auto;
+            text-decoration: none;
+            color:#E4393C;
+        }
+        #products li a:hover{
+            border: solid 1px #E4393C;
+        }
+        .shopcart{
+            width:1100px;
+            margin: 50px auto;
+        }
+        .shopcart h1{
+            font-size:18px;
+            color:#E4393C;
+            border-bottom:solid 4px #E9E9E9;
+            padding-bottom: 10px;
+        }
+        .shopcart .list-head{
+            width: 96%;
+            background: #F3F3F3;
+            height: 40px;
+            line-height: 40px;
+            padding:0 2% 0 2%;
+        }
+        .shopcart .list-head div{
+            float:left;
+        }
+        .h1,.c1{width: 40%;}
+        .h2,.c2{width: 20%;}
+        .h3,.c3{width: 20%;}
+        #cart-list .pl{
+            width: 100%;
+            height: 104px;
+            border-bottom:solid 1px #C5C5C5;
+            clear: left;
+        }
+        #cart-list .pl div{
+            float: left;
+            height: 94px;
+            line-height: 94px;
+            background: #FFF4E8;
+        }
+        #cart-list div span{
+            display: block;
+            float: left;
+            padding:5px 0 0 20px;
+        }
+        #cart-list div p{
+            float: left;
+            padding-left: 20px;
+        }
+        #cart-list div span img{
+            width:80px;
+        }
+        .c2 em{padding: 0 5px;}
+        .pl a{
+            color:#666;
+            text-decoration: none;
+        }
+        .pl a:hover{
+            color:#ff0000;
+            text-decoration: underline;
+        }
+        #totalCount{height: 30px;padding-left: 20px;line-height: 30px;font-size: 18px;}
+    </style>
+    <script src="js/cookieBox.js"></script>
+</head>
+<body>
+	<div id="products">
+	    <ul id="ullist">
+	        <li>
+	            <span><img src="img/0.jpg"></span>
+	            <em>&yen;2999</em>
+	            <p>乐视超级电视 S50</p>
+	            <a href="javascript:;">加入购物车</a>
+	        </li>
+	        <li>
+	            <span><img src="img/1.jpg"></span>
+	            <em>&yen;3999</em>
+	            <p>乐视超级电视 S60</p>
+	            <a href="javascript:;">加入购物车</a>
+	        </li>
+	        <li>
+	            <span><img src="img/2.jpg"></span>
+	            <em>&yen;4999</em>
+	            <p>乐视超级电视 S70</p>
+	            <a href="javascript:;">加入购物车</a>
+	        </li>
+	        <li>
+	            <span><img src="img/3.jpg"></span>
+	            <em>&yen;5999</em>
+	            <p>乐视超级电视 S80</p>
+	            <a href="javascript:;">加入购物车</a>
+	        </li>
+	    </ul>
+	</div>
+	<div class="clear"></div>
+	<div class="shopcart">
+	    <h1>全部商品</h1><p id="totalCount">0</p>
+	    <div class="list-head">
+	        <div class="h1">商品名称</div>
+	        <div class="h2">价格</div>
+	        <div class="h2">数量</div>
+	        <div class="h3">操作</div>
+	    </div>
+	    <div id="cart-list">
+	       <!-- <div class="pl">
+		            <div class="c1">
+		                <span><img src="img/1.jpg"></span>
+		                <p>乐视超级电视 S50</p>
+		            </div>
+		            <div class="c2">&yen;1000</div>
+		            <div class="c2"><input>1</div>
+		            <div class="c3"><a href="#">删除</a></div>
+	        </div>-->
+	    </div>
+	</div>
+	
+	<script>
+		//存储cookie时要存储的数据:1.型号标识  ,2.数量 
+		//设置存储的格式是id&&num||id2&&num2||.....
+		var liList=document.getElementsByTagName("li");
+		var aList=[];
+		for(var n=0;n<liList.length;n++){
+			aList[n]=liList[n].children[3];
+		}
+		initShow();
+		for(var i=0;i<aList.length;i++){
+			aList[i].index=i;
+			aList[i].onclick=function(){
+				//判断里面有没有存储该型号的cookie值，没有的话添加html代码，并加上cookie，
+				//有的话HTML数量加1，cookie的相应值也加1
+				var result=idCheck(this.index);
+				switch(result){
+					case 0:
+						//在购物车中添加物品
+						addHtml(this.index,0);
+						break;
+					case 1:
+						//添加数量
+						addCount(this);
+						break;
+				}
+				//最后将总数量也加1
+				var totalNode=document.getElementById("totalCount");
+				var totalCount=parseInt(totalNode.innerHTML);
+				totalCount++;
+				totalNode.innerHTML=totalCount;
+			return false;
+			}
+		}
+		
+		
+		//当页面加载或者刷新后，将cookie中对应的物品添加到购物车中
+		function initShow(){
+			var carlist=document.getElementById("cart-list");
+			var totalCount=0;
+	        carlist.innerHTML="";
+			var strCookie=cookieObj.getCookie("goodBuy");
+			if(strCookie){
+				var arrCookie=strCookie.split("||");
+				for(var i=0;i<arrCookie.length;i++){
+					var arrItem=arrCookie[i].split("&&");
+					var id="乐视超级电视 S"+(5+parseInt(arrItem[0]))+"0";
+					var src="img/"+parseInt(arrItem[0])+".jpg";
+					var price=parseInt(arrItem[0])*1000+2999;
+					var totalPrice=price*parseInt(arrItem[1]);
+					totalCount+=parseInt(arrItem[1]);
+					var newDiv=document.createElement("div");
+					newDiv.setAttribute("class","pl");
+					var html="<div class=\"c1\"><span><img src="+src+" /></span><p>"+id+"</p></div>";
+			       	html+="<div class=\"c2\">"+totalPrice+"</div><div class=\"c2\"><input type='button' value='-' onclick='changeCount(this,-1)'/><em>"+arrItem[1]+"</em><input type='button' value='+' onclick='changeCount(this,1)'/></div>";
+			       	html+="<div class=\"c3\"><a class='deletebt' href=\"#\" onclick='deleteProduct(this)'>删除</a></div>";
+			        newDiv.innerHTML=html;
+			        var carlist=document.getElementById("cart-list");
+			        carlist.appendChild(newDiv);
+				}
+			}
+			var totalNode=document.getElementById("totalCount");
+			totalNode.innerHTML=totalCount;
+		}
+		
+		
+		//查找在cookie(购物车)中是否有该物品
+		function idCheck(id){
+			var strCookie=cookieObj.getCookie("goodBuy");
+			if(strCookie){
+				var arrCookie=strCookie.split("||");
+				for(var i=0;i<arrCookie.length;i++){
+					var arrItem=arrCookie[i].split("&&");
+					if(arrItem[0]==id){
+						return 1;
+					}
+				}
+				return 0;
+			}else{
+				return 0;
+			}
+		}		
+		
+		
+		//当购物车无此物品时,在购物车中添加物品(传入参数为id)
+		function addHtml(i,count){
+			var id="乐视超级电视 S"+(5+i)+"0";
+			var src="img/"+i+".jpg";
+			var price=i*1000+2999;
+			var totalPrice=price*(++count);
+			var newDiv=document.createElement("div");
+			newDiv.setAttribute("class","pl");
+			var html="<div class=\"c1\"><span><img src="+src+" /></span><p>"+id+"</p></div>";
+	       	html+="<div class=\"c2\">"+totalPrice+"</div><div class=\"c2\"><input type='button' value='-' onclick='changeCount(this,-1)'/><em>"+count+"</em><input type='button' value='+' onclick='changeCount(this,1)'/></div>";
+	       	html+="<div class=\"c3\"><a class='deletebt' href=\"#\" onclick='deleteProduct(this)'>删除</a></div>";
+	        newDiv.innerHTML=html;
+	        var carlist=document.getElementById("cart-list");
+	        carlist.appendChild(newDiv);
+	        var strCookie=cookieObj.getCookie("goodBuy");
+			if(strCookie){
+				var newCookie=strCookie+"||"+i+"&&"+count;
+				cookieObj.setCookie("goodBuy",newCookie,30);
+			}else{
+				var newCookie=i+"&&"+count;
+				cookieObj.setCookie("goodBuy",newCookie,30);
+			}
+		}
+		
+		
+		//当购物车存在此商品时,添加数量
+		function addCount(dom){
+			var id=dom.index;//取得该物品的id
+			var index;//index保存位置,用来修改页面显示的数量和价格信息
+			var strCookie=cookieObj.getCookie("goodBuy");
+			var arrCookie=strCookie.split("||");
+			for(var i=0;i<arrCookie.length;i++){
+				var arrItem=arrCookie[i].split("&&");
+				if(arrItem[0]==id){
+					var count=parseInt(arrItem[1]);
+					arrCookie[i]=id+"&&"+(++count);
+					index=i;
+				}
+			}
+		    var newCookie=arrCookie.join("||");
+		    cookieObj.setCookie("goodBuy",newCookie,30);
+		    var nowPl=dom.parentNode.parentNode.parentNode.parentNode.children[2].children[3].children[index];
+			var nowNode=nowPl.children[2].children[1];
+			var nowNode1=nowPl.children[1];
+			nowNode.innerHTML=count;
+			var totalPrice=parseInt(nowNode1.innerHTML);
+			nowNode1.innerHTML=totalPrice+(1000*id+2999);
+		}
+		
+		
+		function changeCount(dom,temp){
+			if(temp==1){
+				var nowNode=dom.previousElementSibling;
+				var count=parseInt(nowNode.innerHTML);
+				var nowNode1=dom.parentNode.previousElementSibling;
+				var totalPrice=parseInt(nowNode1.innerHTML);
+				var id=((totalPrice/count)-2999)/1000;
+//				console.log(totalPrice+" "+count);
+//				console.log(i);
+				nowNode.innerHTML=++count;
+				nowNode1.innerHTML=totalPrice+(1000*id+2999);
+				var strCookie=cookieObj.getCookie("goodBuy");
+				var arrCookie=strCookie.split("||");
+				for(var i=0;i<arrCookie.length;i++){
+					var arrItem=arrCookie[i].split("&&");
+					if(arrItem[0]==id){
+						arrCookie[i]=id+"&&"+count;
+					}
+				}
+		        var newCookie=arrCookie.join("||");
+		        cookieObj.setCookie("goodBuy",newCookie,30);
+		        var totalNode=document.getElementById("totalCount");
+				var totalCount=parseInt(totalNode.innerHTML);
+				totalCount++;
+				totalNode.innerHTML=totalCount;
+			}
+			else{
+				var nowNode=dom.nextElementSibling;
+				var count=parseInt(nowNode.innerHTML);
+				var nowNode1=dom.parentNode.previousElementSibling;
+				var totalPrice=parseInt(nowNode1.innerHTML);
+				var id=((totalPrice/count)-2999)/1000;
+				var nowDom=dom.parentNode.nextElementSibling.children[0];
+//				console.log(totalPrice+" "+count);
+				if(count==1){
+					deleteProduct(nowDom);
+				}else{
+					nowNode.innerHTML=--count;
+					nowNode1.innerHTML=totalPrice-(1000*id+2999);
+					var strCookie=cookieObj.getCookie("goodBuy");
+					var arrCookie=strCookie.split("||");
+					for(var i=0;i<arrCookie.length;i++){
+						var arrItem=arrCookie[i].split("&&");
+						if(arrItem[0]==id){
+							arrCookie[i]=id+"&&"+count;
+						}
+					}
+			       	var newCookie=arrCookie.join("||");
+		       		cookieObj.setCookie("goodBuy",newCookie,30);
+		       		var totalNode=document.getElementById("totalCount");
+					var totalCount=parseInt(totalNode.innerHTML);
+					totalCount--;
+					totalNode.innerHTML=totalCount;
+				}
+			}
+		}
+		
+		//当数量为0或点击删除时，删除cookie中对应的值，并在购物车中删除该商品
+		function deleteProduct(dom){
+			var carlist=document.getElementById("cart-list");
+			var thisDiv=dom.parentNode.parentNode;
+	        carlist.removeChild(thisDiv);
+	        var nowNode=dom.parentNode.previousElementSibling.children[1];
+	       	var count=parseInt(nowNode.innerHTML);
+			var nowNode1=dom.parentNode.previousElementSibling.previousElementSibling;
+			var totalPrice=parseInt(nowNode1.innerHTML);
+			var id=((totalPrice/count)-2999)/1000;
+	        var strCookie=cookieObj.getCookie("goodBuy");
+	        var arrCookie=strCookie.split("||");
+	        for(var i=0;i<arrCookie.length;i++){
+				var arrItem=arrCookie[i].split("&&");
+				if(arrItem[0]==id){
+					arrCookie.splice(i,1);
+					var totalNode=document.getElementById("totalCount");
+					var totalCount=parseInt(totalNode.innerHTML);
+					totalCount-=arrItem[1];
+					totalNode.innerHTML=totalCount;
+				}
+			}
+	        var newCookie=arrCookie.join("||");
+		    cookieObj.setCookie("goodBuy",newCookie,30);
+		}
+		
+	</script>
+	
+	
+</body>
+</html>

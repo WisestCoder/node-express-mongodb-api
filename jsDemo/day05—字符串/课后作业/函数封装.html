@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//1、传入一个年份参数，判断某年是否为闰年
+			document.write("1、传入一个年份参数，判断某年是否为闰年:2016<br />");
+			function calcute(year){
+				if(year%4!=0){
+					document.write(year+"年不是闰年");
+				}
+				else if(year%100==0 && year%400!=0){
+					document.write(year+"年不是闰年");
+				}
+				else{
+					document.write(year+"年是闰年");
+				}
+			}
+			calcute(2016);
+			
+			//2、传入一个日期参数，传入一个相连符号，进行日期格式化
+			document.write("<br />2、传入一个日期参数，传入一个相连符号，进行日期格式化:2008-8-8");
+			function init(str){
+				var arr=str.split("-");
+				var d=new Date();
+				d.setFullYear(arr[0]);
+				d.setMonth(arr[1]-1);
+				d.setDate(arr[2]);
+				document.write("<br />");
+				document.write("现在是北京时间:"+d.getFullYear()+"年"+(d.getMonth()+1)+"月"+d.getDate()+"日<br />");
+			}
+			init("2008-8-8");
+			
+			//3、传入一个月份参数，获得今年某月的天数
+			document.write("3、传入一个月份参数，获得今年某月的天数<br />")
+			function getDate(month){
+				var d=new Date();
+				d.setMonth(month-1);
+				d.setDate(32);
+				var date1=d.getDate();
+				var day=32-date1;
+				document.write(month+"月份的天数是"+day+"<br />");
+			}
+			getDate(2);
+			
+			//4、传入一个日期字符串参数，传入一个分隔符参数，将字符串转为日期
+			document.write("4、传入一个日期字符串参数，传入一个分隔符参数，将字符串转为日期<br />");
+			
+			
+			//5、传入一个天数参数N（都可以），获得N天以后或者N天以前的日期
+			document.write("5、传入一个天数参数N（都可以），获得N天以后或者N天以前的日期<br />");
+			function dayAfterBefore(n){
+				var d=new Date();
+				d.setDate(d.getDate()+n);
+				document.write(n+"天之后的时间是:"+d.getFullYear()+"年"+(d.getMonth()+1)+"月"+d.getDate()+"日<br />");
+			}
+			dayAfterBefore(28);
+			
+			//6、传入一个起始日期参数，传入一个结束日期参数，计算两个日期差（天、时、分、刚刚）
+			document.write("6、传入一个起始日期参数，传入一个结束日期参数，计算两个日期差（天、时、分、刚刚）<br />");
+			function howLong(str1,str2){
+				var arr1=str1.split("-");
+				var arr2=str2.split("-");
+				var d=new Date();
+				d.setFullYear(arr1[0]);
+				d.setMonth(arr1[1]-1);
+				d.setDate(arr1[2]);
+				var flag=true;
+				var count=0;
+				while(flag){
+					if(d.getDate()==arr2[2]&&d.getMonth()==(arr2[1]-1)&&d.getFullYear()==arr2[0])
+						flag=false;
+					else{
+						count++;
+						d.setDate(d.getDate()+1);
+					}
+				}
+				document.write(str1+"和"+str2+"相差"+count+"天");
+				
+			}
+			howLong("2008-8-8","2016-8-10");
+			
+			
+		</script>
+	</body>
+</html>

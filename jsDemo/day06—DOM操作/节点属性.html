@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>节点属性</title>
+	</head>
+	<body>
+		<div class="div1" style="background: red;"><p style="font-size: 30px;">div1</p></div>
+		<div id="div2">
+			<p id="p1">p1</p>
+			<p id="p2">p2</p>
+			<p id="p3">p3</p>
+		</div>
+		<div id="div3">
+			<p id="p4">p4</p>
+			<p id="p5">p5</p>
+			<p id="p6">p6</p>
+		</div>
+		
+		<script>
+			var div1=document.getElementsByClassName("div1");
+			var div2=document.getElementById("div2");
+			var div3=document.getElementById("div3");
+			var divList=document.getElementsByTagName("div");
+			dw(divList[0].nodeName);
+			dw(divList[0].nodeValue);
+			dw(divList[0].nodeType);
+			dw(div1[0].tagName);
+			dw(div1[0].className);
+			dw(div1[0].innerHTML);//不包含本身标签
+			dw(div1[0].outerHTML);//包含本身标签
+			dw(div1[0].innerText);//只包含标签里面的文本内容
+			div1[0].innerHTML="divdiv";
+			dw(div1[0].style.background);
+			dw(div1[0].getAttribute("style"));
+			
+			
+			
+			
+			
+			function dw(str){
+				document.write(str);
+				document.write("<br />");
+			}
+			
+		</script>
+	</body>
+</html>

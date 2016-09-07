@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>勾股定理快速排序</title>
+		<style>
+				*{margin: 0;padding: 0;}
+				div{width: 5px;height: 5px;position: absolute;}
+		</style>
+		<script src="变速运动封装/moveUtil.js"></script>
+	</head>
+	<body>
+		<script>
+			var timer;
+//			var clientHeight=document.documentElement.clientHeight||document.body.clientHeight;
+//			var count=Math.floor(clientHeight/5);
+			randomDiv(180);
+			document.onmousedown=function(){
+				clearInterval(timer);
+				var arrDiv=sortDiv();
+				moveGo(arrDiv);
+			}
+		
+			
+			function randomDiv(n){
+				var fragment=document.createDocumentFragment();
+				for(var i=0;i<n;i++){
+					var divNew=document.createElement("div");
+					divNew.style.top=Math.floor(Math.random()*900)+"px";
+					divNew.style.left=Math.floor(Math.random()*1200)+"px";
+					divNew.style.background="rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";
+					fragment.appendChild(divNew);
+				}
+				document.body.appendChild(fragment);
+			}
+			
+			function sortDiv(){
+				var arrDiv=[];
+				var divList=document.getElementsByTagName("div");
+				for(var m=0;m<divList.length;m++){
+					arrDiv.push(divList[m]);
+				}
+				for(var i=0;i<arrDiv.length;i++){
+					var index=i;
+					for(var j=i+1;j<arrDiv.length;j++){
+						if(getLongValue(arrDiv[index])>getLongValue(arrDiv[j])){
+							index=j;
+						}
+					}
+					var temp;
+					temp=arrDiv[index];
+					arrDiv[index]=arrDiv[i];
+					arrDiv[i]=temp;
+				}
+				return arrDiv;
+			}
+			
+			function getLongValue(dom){
+				return Math.pow(dom.offsetTop,2)+Math.pow(dom.offsetLeft,2);
+			}
+			
+			function moveGo(divList){
+				for(var i=0;i<divList.length;i++){
+					var longValue1=parseInt(getStyle(divList[i],"top"))*parseInt(getStyle(divList[i],"top"))+parseInt(getStyle(divList[i],"left"))*parseInt(getStyle(divList[i],"left"));
+					console.log(longValue1);
+					var target={
+						"top":(5*i),
+						"left":(7*i),
+					}
+					moveStart(divList[i],target);
+				}
+			}
+			
+		</script>
+	</body>
+</html>

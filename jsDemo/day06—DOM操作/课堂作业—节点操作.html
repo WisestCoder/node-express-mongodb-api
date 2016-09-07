@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>节点操作</title>
+	</head>
+	<body>
+		<input type="button" value="创建" id="add" /><br />
+		请输入你要删除的节点位置(第几个):<input type="text" id="txt" />
+		<input type="button" value="删除" id="del" />
+		请输入你要查看的节点位置(第几个):<input type="text" id="txt1" />
+		<input type="button" value="查看" id="look" />
+		<div id="div1"></div>
+		<script>
+			var div1=document.getElementById("div1");
+			var add=document.getElementById("add");
+			var del=document.getElementById("del");
+			var look=document.getElementById("look");
+			var txt=document.getElementById("txt");
+			var txt1=document.getElementById("txt1");
+			
+			var count=0;
+			add.onclick=function(){
+				var newDiv=document.createElement("div")
+				var divAdd=div1.appendChild(newDiv);
+				count++;
+				divAdd.innerHTML="已创建新的div!,这是第"+count+"个div";
+			}
+			
+			del.onclick=function(){
+				var index=txt.value;
+				var divList=div1.children;
+				for(var i=0;i<divList.length;i++){
+					if(i==index-1){
+						div1.removeChild(divList[i]);
+					}
+				}
+			}
+			
+			look.onclick=function(){
+				var index=txt1.value;
+				var divList=div1.children;
+				for(var i=0;i<divList.length;i++){
+					if(i==index-1){
+						
+					}
+				}
+			}
+			
+			
+		</script>
+	</body>
+</html>

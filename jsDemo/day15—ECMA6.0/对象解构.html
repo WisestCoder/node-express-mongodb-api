@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数组解构</title>
+	</head>
+	<body>
+		<script>
+			//1.按照格式对照，但是不用跟数组一样按照顺序来完成赋值。
+			let{attr1:a,attr2:b}={attr1:1,attr2:2};
+			alert(a+" "+b);   //a=1,b=2
+			let{attr1:a2,attr2:b2}={attr2:2,attr1:1};
+			alert(a2+" "+b2);   //a2=1,b2=2
+			
+			//简写方式
+			let{c,d}={c:1,d:2};
+			alert(c+" "+d);   //c=1,d=2
+			
+			var obj={
+				name:"zhansan",
+				age:20
+			}
+			let{name:c2,age:d2}=obj;
+			alert(c2+" "+d2);   //c2="zhangsan",d2=20
+			
+			//对象赋值的利用 toString方法
+			let{toString:s1}=2;
+			let{toString:s2}=true;
+			alert(s1+" "+s2);
+			
+			
+		</script>
+	</body>
+</html>

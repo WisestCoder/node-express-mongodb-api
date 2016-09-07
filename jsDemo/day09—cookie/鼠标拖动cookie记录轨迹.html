@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>鼠标拖动记录轨迹</title>
+		<style>
+			div{width: 100px;height: 100px;position: absolute;top: 0;left: 0;background: red;display: none;}
+		</style>
+		<script src="eventList.js"></script>
+		<script src="cookieBox.js"></script>
+	</head>
+	<body>
+		<div id="div"></div>
+		
+		<script>
+			var div=document.getElementById("div");
+			document.onmousedown=function(event){
+				document.body.onmousemove=function(event){
+				var event=eventUtil.getEvent(event);
+				eventUtil.getTarget(event).style.top=(event.clientY-50)+"px";
+				eventUtil.getTarget(event).style.left=(event.clientX-50)+"px";
+				}
+			}
+			document.onmouseup=function(event){
+				if(event.clientY-50<50){
+					div.style.top=0;
+				}else if(event.clientY+50>document.documentElement.clientHeight-50){
+					div.style.top=document.documentElement.clientHeight-100+"px";
+				}
+				if(event.clientX-50<50){
+					div.style.left=0;
+				}else if(event.clientX+50>document.documentElement.clientWidth-50){
+					div.style.left=document.documentElement.clientWidth-100+"px";
+				}
+				//alert(eventUtil.getTarget(event).style.top+"   "+eventUtil.getTarget(event).style.left);
+				document.body.onmousemove=null;
+				var str=div.style.left+" "+div.style.top;
+				cookieObj.setCookie("weizi",str,10);
+			}
+			var strWeizi=cookieObj.getCookie("weizi");
+			var arr=strWeizi.split(" ");
+			div.style.left=arr[0];
+			div.style.top=arr[1];
+			div.style.display="block";
+		</script>
+	</body>
+</html>

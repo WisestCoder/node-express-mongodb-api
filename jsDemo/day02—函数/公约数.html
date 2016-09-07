@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function add(i){
+        if(i==1){
+            return 1;
+        }
+        else{
+            return i+add(i-1);
+        }
+    }
+
+    document.write("100内数累加是："+add(100)+"<br />");
+    function mul(i){
+        if(i==1){
+            return 1;
+        }
+        else{
+            return i*mul(i-1);
+        }
+    }
+    document.write("100的阶乘是："+mul(100)+"<br />");
+
+
+    function tuzi(num,month){
+        if(month==1||month==2)
+            return num;
+        else
+            return tuzi(num,month-1)+tuzi(num,month-2);
+    }
+    document.write(tuzi(1,4)+"<br />");
+
+
+    var sum=new Array();
+    function tuzi2(num,month){
+        for(var m=1;m<=month;m++){
+            if(m==1||m==2){
+                sum[m]=num;
+            }
+            else
+                sum[m]=sum[m-1]+sum[m-2];
+        }
+        for(var k=1;k<sum.length;k++){
+            document.write(sum[k]+" ");
+        }
+    }
+    tuzi2(1,100);
+
+
+//    var n=1;
+//    function qingwa(jishu){
+//        if(jishu>=0){
+//                return n*qingwa(jishu-i);
+//        }
+//    }
+//    document.write(qingwa(100));
+
+    document.write("<br />");
+    function gongyueshu(num1,num2){
+        if(num1==num2){
+            return num1;
+        }
+        else{
+            if(num1>num2)
+                return gongyueshu(num1-num2,num2);
+            else
+                return gongyueshu(num1,num2-num1);
+        }
+    }
+    function gongbeishu(num1,num2){
+        return num1*num2/(gongyueshu(num1,num2));
+    }
+    var n1=47;
+    var n2=20;
+    document.write(n1+"和"+n2+"最大公约数为："+gongyueshu(n1,n2)+"<br />");
+    document.write(n1+"和"+n2+"最小公倍数为："+gongbeishu(n1,n2)+"<br />");
+
+
+    function hannuota(n){
+        if(n==1)
+            return 1;
+        else
+            return 2*hannuota(n-1)+1;
+    }
+    document.write(hannuota(5)+"<br />");
+
+
+    function fn2(n){
+        if(n==1)
+            return 1;
+        else if(n==2)
+            return 2;
+        else
+            return fn2(n-1)+fn2(n-2);
+    }
+    document.write(fn2(5));
+
+
+    function huanghou(){
+
+    }
+
+
+
+</script>
+</body>
+</html>

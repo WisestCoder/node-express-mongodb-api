@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ajax跨域</title>
+		<style>
+		</style>
+	</head>
+	<body>
+		<select>
+			<option>北京</option>
+			<option>上海</option>
+			<option>南昌</option>
+			<option>广州</option>
+		</select>
+		<input type="button" name="btn" id="btn" value="查询" />
+		<p id="pInfo"></p>
+		<script>
+			var btn=document.getElementById("btn");
+			var pInfo=document.getElementById("pInfo");
+			var oSelect=document.getElementsByTagName("select")[0];
+			btn.onclick=function(){
+				var str;
+				var xhr;
+				if(window.XMLHttpRequest){
+					xhr=new XMLHttpRequest();
+				}
+				else{
+					xhr=new ActiveXObject("Micorsoft.XMLHTTP");
+				}
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4){
+						if(xhr.status==200){
+							var result=JSON.parse(xhr.responseText);
+							pInfo.innerHTML="城市:"+result.retData.city+"<br />";
+							pInfo.innerHTML+="天气:"+result.retData.weather+"<br />";
+							pInfo.innerHTML+="发布时间"+result.retData.date+" "+result.retData.time+"<br />";
+							pInfo.innerHTML+="气温:"+result.retData.temp+"<br />";
+							pInfo.innerHTML+="风力:"+result.retData.WS+"<br />";
+						}
+					}
+				}
+				switch(oSelect.value){
+					case "北京":
+						str="beijing";
+						break;
+					case "上海":
+						str="shanghai";
+						break;
+					case "南昌":
+						str="nanchang";
+						break;
+					case "广州":
+						str="guangzhou";
+						break;
+				}
+				xhr.open("GET","http://apis.baidu.com/apistore/weatherservice/weather?citypinyin="+str,true);
+				xhr.setRequestHeader("apikey","45d8173dfc35ce17924e1141a441258e"),
+				xhr.send();
+			}
+		</script>
+		
+	</body>
+</html>

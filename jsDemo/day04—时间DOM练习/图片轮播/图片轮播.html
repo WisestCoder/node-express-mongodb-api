@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{margin: 0;padding: 0;}
+			a{text-decoration: none;font-size: 30px;position: absolute;display: block;width: 30px;height: 30px;}
+			div{width: 130px;height: 130px;margin: 0 auto;position: relative;}
+			#left{top:50px;left:0;}
+			#right{top:50px;right:-15px;}
+		</style>
+	</head>
+	<body>
+		<div>
+			<img src="images/img0.png" id="pic"/>
+			<a href="#" id="left"> < </a>
+			<a href="#" id="right"> > </a>
+		</div>
+		<script>
+			var leftBtn=document.getElementById("left");
+			var rightBtn=document.getElementById("right");
+			var imgBox=document.getElementById("pic");
+			var temp=0;
+			imgBox.src="images/img0.png";
+			leftBtn.onclick=function(){
+				if(temp<=0){
+					temp=9;
+					imgBox.src="images/img"+temp+".png";
+				}
+				else{
+					temp--;
+					imgBox.src="images/img"+temp+".png";
+				}
+			}
+			rightBtn.onclick=function(){
+				if(temp>=9){
+					temp=0;
+					imgBox.src="images/img"+temp+".png";
+				}
+				else{
+					temp++;
+					imgBox.src="images/img"+temp+".png";
+				}
+			}
+			
+		</script>
+	</body>
+</html>

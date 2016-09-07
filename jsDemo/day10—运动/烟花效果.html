@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>烟花效果</title>
+		<style>
+			body{margin: 0;padding: 0;text-align: center;}
+			#divBox{width: 800px;height: 800px;background: #000;margin: 50px auto 20px;position: relative;}
+			#divBox div{position: absolute;}
+		</style>
+		<script src="moveUtil.js"></script>
+	</head>
+	<body>
+		
+		<div id="divBox">
+			
+		</div>
+		<input type="button" value="自动放烟花" id="autoPlay" />
+		<input type="button" value="手动放烟花" id="headPlay" />
+		
+		<script>
+			
+			var divBox=document.getElementById("divBox");
+			var autoPlay=document.getElementById("autoPlay");
+			var headPlay=document.getElementById("headPlay");
+			//设置烟花的上升速度
+			var speed=300;
+			
+			headPlay.onclick=function(){
+				var yanhua=create();
+				var target={
+					"top":randomHeight()
+				}
+				moveStart(yanhua,target,function(){
+					var weizhiLeft=yanhua.offsetLeft;
+					var weizhiTop=yanhua.offsetTop;
+					divBox.removeChild(yanhua);
+					var arr=[];
+					for(var i=0;i<30;i++){
+						var yanhuaNew=document.createElement("div");
+						yanhuaNew.style.width="4px";
+						yanhuaNew.style.height="4px";
+						yanhuaNew.style.background="#FFFF00";
+						yanhuaNew.style.top=weizhiTop+"px";
+						yanhuaNew.style.left=weizhiLeft+"px";
+						divBox.appendChild(yanhuaNew);
+						arr.push(yanhuaNew);
+						arr[i].index=i;
+						var target={
+							"top":weizhiTop-200+Math.floor(Math.random()*400),
+							"left":weizhiLeft-200+Math.floor(Math.random()*400),
+						}
+						moveStart(arr[i],target,function(){
+							divBox.removeChild(arr[this.index]);
+						});
+					}
+				});
+			}
+			
+			function create(){
+				//烟花的初始上升位置
+				var ran=Math.floor(Math.random()*500+100);
+				var yanhua=document.createElement("div");
+				yanhua.style.width="3px";
+				yanhua.style.height="10px";
+				yanhua.style.background="#FFFF00";
+				yanhua.style.top="800px";
+				yanhua.style.left=ran+"px";
+				divBox.appendChild(yanhua);
+				return yanhua;
+			}
+			
+			function boom(dom){
+				
+			}
+			
+			function randomHeight(){
+				var ran=Math.floor(Math.random()*200+100);
+				return ran;
+			}
+			
+		</script>
+	</body>
+</html>

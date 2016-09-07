@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>下课倒计时</title>
+		<style>
+			body{font-size: 20px;}
+			input{width: 48px;height: 30px;background: #50B6BA;font-size: 20px;line-height: 30px;}
+			#btn,#stop{width: 116px;height: 36px;}
+		</style>
+	</head>
+	<body>
+		<p>下课倒计时:</p>
+		<input type="text" id="hour" />时
+		<input type="text" id="minute" />分
+		<input type="text" id="second" />秒<br /><br />
+		<input type="button" value="开始倒计时" id="btn" />
+		<input type="button" value="停止倒计时" id="stop" />
+		
+		<script>
+			var hour=document.getElementById("hour");
+			var minute=document.getElementById("minute");
+			var second=document.getElementById("second");
+			var btn=document.getElementById("btn");
+			var stop=document.getElementById("stop");
+			var interval;
+			var d=new Date();
+			var nowHour=d.getHours();
+			var nowMinute=d.getMinutes();
+			var nowSecond=d.getSeconds();
+//			alert(nowHour+" "+nowMinute+" "+nowSecond);
+			if((nowHour>8||(nowHour==8&&nowMinute>=30)) && (nowHour<12||(nowHour==12&&nowMinute<=30) )){
+//				alert(nowHour+" "+nowMinute+" "+nowSecond);
+				hour.value=12-nowHour;
+				minute.value=30-nowMinute;
+				if(minute.value<0){
+					hour.value--;
+					minute+=60;
+				}
+				second.value=0-nowSecond;
+				if(second.value<0){
+					minute.value--;
+					second+=60;
+				}
+				hour.setAttribute("readonly","readonly");
+				minute.setAttribute("readonly","readonly");
+				second.setAttribute("readonly","readonly");
+				interval=setInterval(timeGo,1000);
+			}
+			else if((nowHour>14||(nowHour==14&&nowMinute>=30)) && (nowHour<18||(nowHour==18&&nowMinute<=30) )){
+				hour.value=18-nowHour;
+				minute.value=30-nowMinute;
+				if(minute.value<0){
+					hour.value--;
+					minute.value=parseInt(minute.value)+60;
+				}
+				second.value=0-nowSecond;
+				if(second.value<0){
+					minute.value--;
+					second.value=parseInt(second.value)+60;
+				}
+				interval=setInterval(timeGo,1000);
+			}
+			else if((nowHour>19||(nowHour==19&&nowMinute>=30)) && (nowHour<21||(nowHour==21&&nowMinute<=30) )){
+				hour.value=21-nowHour;
+				minute.value=30-nowMinute;
+				if(minute.value<0){
+					hour.value--;
+					minute.value=parseInt(minute.value)+60;
+				}
+				second.value=0-nowSecond;
+				if(second.value<0){
+					minute.value--;
+					second.value=parseInt(second.value)+60;
+				}
+				interval=setInterval(timeGo,1000);
+			}
+			else{
+				alert("现在还不是上课时间");
+				hour.removeAttribute("readonly");
+				minute.removeAttribute("readonly");
+				second.removeAttribute("readonly");
+				
+			}
+			
+			
+			function timeGo(){
+				second.value--;
+				if(second.value<0){
+					minute.value--;
+					if(minute.value<0){
+						hour.value--;
+						minute.value=59;
+					}
+					else if(minute.value<10)
+						minute.value="0"+minute.value;
+					second.value=59;
+				}
+				else if(second.value<10)
+					second.value="0"+second.value;
+				
+				if(hour.value=="00"&&minute.value=="00"&&second.value=="00"){
+					clearInterval(interval);
+					alert("倒计时完成!")
+				}
+			}
+			btn.onclick=function(){
+				btn.onclick=null;
+				hour.setAttribute("readonly","readonly");
+				minute.setAttribute("readonly","readonly");
+				second.setAttribute("readonly","readonly");
+				if(hour.value>=24||minute.value>=60||second.value>=60){
+					alert("您输入的时间格式不正确，请重新输入!");
+					location.reload();
+				}
+				interval=setInterval(timeGo,1000);
+			}
+			stop.onclick=function(){
+				clearInterval(interval);
+			}
+			
+		</script>
+		
+	</body>
+</html>

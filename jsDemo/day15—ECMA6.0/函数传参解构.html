@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>函数传参解构</title>
+	</head>
+	<body>
+		<script>
+			//函数传参(arguments方法)
+			function aa(){
+				let [e,,f]=arguments;
+				alert(e+" "+f);
+			}
+			aa(10,20,30);
+			
+			//函数传参(对象方法)
+			function move({x=0,y=0}={}){
+				alert([x,y]);
+			}
+			move({x:3,y:5});   //x=3,y=5
+			move({x:3});   //x=3,y=5
+			move({});   //x=0,y=0
+			move();   //x=0,y=0
+			
+			
+			var result=0;
+			function fn(a){
+				result+=a;
+				if(a>5){
+					return result; 
+				}
+				else{
+					return fn;
+				}
+			}
+			alert(fn(2)(3)(4)(5)(6));
+			
+			
+		</script>
+	</body>
+</html>

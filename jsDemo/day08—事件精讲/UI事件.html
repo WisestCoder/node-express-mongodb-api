@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>UI事件</title>
+	</head>
+	<body>
+		<input type="text" value="文本框" id="txt"/>
+		<div style="height: 1500px;"></div>
+		
+		<script>
+			window.onload=function(){
+				var txt=document.getElementById("txt");
+				alert("欢迎进入本页面!");
+				window.onerror=function(){
+					alert("error!");
+				}
+				txt.onselect=function(){
+					alert("您已经选择了文本框!");
+				}
+				window.onresize=function(){
+					console.log("窗口发生改变!改变后为:"+document.documentElement.clientHeight+" "+document.body.clientWidth);
+				}
+				window.onscroll=function(){
+					console.log("滚动条正在滚动:"+(document.documentElement.scrollTop || document.body.scrollTop));
+				}
+			}
+		</script>
+	</body>
+</html>

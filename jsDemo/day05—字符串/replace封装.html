@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>replace封装</title>
+		<script type="text/javascript" src="replaceNew.js" ></script>
+	</head>
+	<body>
+		<script>
+		
+//			function replaceNew(strBig,str1,str2,n){
+//				var arraySubStr=strBig.split(str1);
+//				var arrNew="";
+//				for(var i=0;i<arraySubStr.length;i++){
+//					if(i==arraySubStr.length-1)
+//						arrNew+=arraySubStr[i];
+//					else if(i==n-1)
+//						arrNew+=arraySubStr[i]+str2;
+//					else
+//						arrNew+=arraySubStr[i]+str1;
+//				}
+//				return arrNew;
+//			}
+			
+			var str="This is a list of items:cherries, limes, oranges, apples, apples, apples, apples, apples, apples, apples, apples, apples, apples. this list end.";
+			var strNew=str.replaceNew("apples","Bananas",3);
+			document.write(str+"<br />");
+			document.write(strNew);
+			
+		</script>
+		
+	</body>
+</html>

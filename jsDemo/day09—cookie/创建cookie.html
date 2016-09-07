@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>创建cookie</title>
+		<script src="cookieBox.js"></script>
+	</head>
+	<body>
+		<div id="div" style="height: 20px;"></div>
+		<input type="text" id="txt" />
+		<input type="button" value="登录" id="btn"/>
+		<span id="div1"></span>
+		
+		<script>
+			var txt=document.getElementById("txt");
+			var btn=document.getElementById("btn");
+			var div=document.getElementById("div");
+			var div1=document.getElementById("div1");
+//			document.cookie="name1=zhangsan;expires="+new Date(0);
+			cookieObj.setCookie("name1","zhangsan",10);
+			document.cookie="name2=lisi";
+			alert("name2+"+cookieObj.getCookie("name2"));
+			cookieObj.removeCookie("name2");
+			div1.innerHTML=document.cookie;
+			
+			btn.onclick=function(){
+				document.cookie="username="+txt.value;
+				div1.innerHTML=document.cookie;
+				var arrCookie=document.cookie.split("; ");
+				for(var i=0;i<arrCookie.length;i++){
+					var nameArr=arrCookie[i].split("=");
+					if(nameArr[0]=="username"){
+						div.innerHTML="username="+nameArr[1];
+					}
+				}
+			}
+			
+			
+		</script>
+	</body>
+</html>

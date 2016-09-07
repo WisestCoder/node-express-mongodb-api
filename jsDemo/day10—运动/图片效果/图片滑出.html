@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>图片滑出</title>
+		<style>
+			*{margin: 0;padding: 0;}
+			li{list-style: none;float: left;}
+			div{width: 810px;height: 320px;margin: 100px 0 0 200px;position: relative;border: 1px solid #ff0;overflow: hidden;}
+			#ulImg{position: absolute;width: 4050px;height: 320px;}
+			#ulA{position: absolute;right: 10px;bottom: 10px;text-decoration: none;text-align: center;}
+			#ulA li{width: 20px;height: 20px;margin-left:4px;background: #FFEBCD;line-height: 20px;}
+			#ulA li a{color:brown;text-decoration: none;}
+		</style>
+		<script src="moveUtil.js"></script>
+	</head>
+	<body>
+		<div id="div">
+			<ul id="ulImg">
+				<li><a href="#"><img src="img/001.jpg" /></a></li>
+				<li><a href="#"><img src="img/002.jpg" /></a></li>
+				<li><a href="#"><img src="img/003.jpg" /></a></li>
+				<li><a href="#"><img src="img/004.jpg" /></a></li>
+				<li><a href="#"><img src="img/001.jpg" /></a></li>
+			</ul>
+			<ul id="ulA">
+				<li><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+			</ul>
+		</div>
+		
+		<script>
+			var ulImg=document.getElementById("ulImg");
+			var ulA=document.getElementById("ulA");
+			var timer;
+			var pageIndex=1;
+			var flag=true;
+			
+			aListBgColor(0);
+			timer=setInterval(function(){
+				if(flag){
+					move(pageIndex);
+				}
+			},3000);
+			for(var i=0;i<ulImg.children.length;i++){
+				ulImg.children[i].onmouseover=function(){
+					flag=false;
+				}
+				ulImg.children[i].onmouseout=function(){
+					flag=true;
+				}
+			}
+			for(var i=0;i<ulA.children.length;i++){
+				ulA.children[i].index=i;
+				ulA.children[i].onclick=function(){
+					pageIndex=this.index;
+					move();
+				}
+			}
+			
+			function move(){
+				if(pageIndex>4){
+					pageIndex=1;
+					ulImg.style.left=0;
+				}
+				var target={
+					"left":-810*pageIndex,
+				}
+				moveStart(ulImg,target);
+				if(pageIndex==4){
+					aListBgColor(0);
+				}
+				else{
+					aListBgColor(pageIndex);
+				}
+				pageIndex++;
+			}
+			
+			function aListBgColor(index){
+				for(var i=0;i<ulA.children.length;i++){
+					ulA.children[i].style.background="#FFEBCD";
+				}
+				ulA.children[index].style.background="#B8860B";
+			}
+			
+		</script>
+		
+	</body>
+</html>

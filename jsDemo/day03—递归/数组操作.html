@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#txt1,#txt2,#txt3{width: 400px;}
+			input{height: 24px;}
+		</style>
+	</head>
+	<body>
+		请输入你要操作的数组(按，隔开):<input type="text" value="" id="txt1" /><br />
+		<input type="button" value="删除重复" onclick="del()" id="btn1" /><br />
+		删除重复后的数组为:<input type="text" value="" id="txt2" readonly="readonly" /><br />
+		<input type="button" value="长度排序" id="btn2" onclick="paixu()" /><br />
+		排序后的数组为:<input type="text" value="" id="txt3" readonly="readonly" /><br />
+		<script>
+			var txt1=document.getElementById("txt1");
+			var txt2=document.getElementById("txt2");
+			var txt3=document.getElementById("txt3");
+			
+			function del(){
+				var animals=txt1.value.split(",");
+				for(var i=0;i<animals.length-1;i++){
+					for(var j=i+1;j<animals.length;j++){
+						if(animals[i]==animals[j]){
+							animals.splice(j,1);
+							j--;
+						}
+					}
+				}
+				txt2.value=animals;
+			}
+			
+			function paixu(){
+				if(txt2.value==""){
+					alert("请先进行删除操作");
+				}
+				else{
+					//选择排序
+					var animals2=txt2.value.split(",");
+					for(var i=0;i<animals2.length-1;i++){
+						var index=i;
+						for(var j=i+1;j<animals2.length;j++){
+							if(animals2[index].length>animals2[j].length){
+								index=j;
+							}
+						}
+						var temp;
+						temp=animals2[index];
+						animals2[index]=animals2[i];
+						animals2[i]=temp;
+					}
+					txt3.value=animals2;
+				}
+				
+			}
+			
+			
+			
+		</script>
+	</body>
+</html>

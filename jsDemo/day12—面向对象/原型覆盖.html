@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原型覆盖</title>
+	</head>
+	<body>
+		<!--<script>
+		    function Person(name,age){
+		        this.name=name;
+		        this.age=age;
+		    }
+		    Person.prototype.showName=function(){
+		        alert(this.name);
+		    }
+		
+		    Person.prototype={
+		        showAge:function(){
+		            alert(this.age);
+		        },
+		        id:1234,
+		        QQ:[]
+		    }
+		    var person1=new Person("a",1);
+		    person1.showAge();//1
+		    person1.showName();//a  错误
+		</script>-->
+	
+		<!--<script>
+		    function Person(name,age){
+		        this.name=name;
+		        this.age=age;
+		    }
+		
+		    Person.prototype={
+		        showAge:function(){
+		            alert(this.age);
+		        },
+		        id:1234,
+		        QQ:[]
+		    }
+		    Person.prototype.showName=function(){
+		        alert(this.name);
+		    }
+		    var person1=new Person("a",1);
+		    person1.showAge();//1
+		    person1.showName();//a
+		</script>-->
+	
+		<script>
+		    function Person(name,age){
+		        this.name=name;
+		        this.age=age;
+		    }
+		    var person2=new Person("b",2);//Person 默认的原型；
+		
+		    Person.prototype.showName=function(){
+		        alert(this.name);
+		    }
+		    Person.prototype.showAge=function(){
+		        alert(80);
+		    }
+		
+		    person2.showName();// b
+		    Person.prototype={
+		        constructor:Person,
+		        showAge:function(){
+		            alert(this.age);
+		        },
+		        showName: function () {
+		            alert(123);
+		        },
+		        id:1234,
+		        QQ:[]
+		    }
+		    //Person.prototype.constructor==Person;
+		    var person1=new Person("a",1);
+		    person1.showAge();//1
+		    person1.showName();//123
+		
+		    person2.showAge(); //80
+		    person2.showName();//b
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>课堂练习</title>
+	</head>
+	<body>
+			<script>
+			var str="This is a list of items:cherries, limes, oranges, apples, apples, apples, apples, apples, apples, apples, apples, apples, apples. this list end.";
+
+//			var index1=str.indexOf("cherries");
+//			var index2=str.lastIndexOf(".",str.length-2);
+//			var str1=str.slice(index1,index2);
+//			var strArr=str1.split(" ");
+//			for(var i=0;i<strArr.length;i++){
+//				strArr[i]=strArr[i].substr(0,strArr[i].length-1);
+//			}
+//			console.log(strArr);
+			
+//			var str1=str.replace(/apples/g,"Bananas");
+//			var str2=str1.replace("Bananas","apples");
+//			console.log(str2);
+			
+			
+			var arr=["Banana","peach","Lemon","Pear","avocado","cantaloupe"];
+			var flag=true;
+			var count=0;
+			var index=0;
+			str=str.replace("apples","apple");
+			while(flag){
+				index=str.indexOf("apples",index+1);
+				if(index>0){
+					count++;
+					if(count>=1){
+						str=str.replace("apples",arr[count-1]);
+						if(count==arr.length)
+							count=0;
+					}
+				}
+				else
+					flag=false;
+			}
+			str=str.replace("apple","apples");
+			console.log(str);
+		</script>
+	</body>
+</html>

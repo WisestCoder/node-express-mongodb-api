@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>动态创建表格</title>
+		<style>
+			td{width: 150px;height: 30px;background: red;border: 1px solid green;text-align: center;}
+		</style>
+	</head>
+	<body>
+		请输入行数:<input type="text" id="row" /><br />
+		请输入列数:<input type="text" id="col" /><br />
+		<input type="button" value="确定" id="btn" />
+		<input type="button" value="在最前面增加一行" id="addFirstRow"/>
+		<input type="button" value="在最后面增加一行" id="addLastRow"/>
+		<input type="button" value=" 删除最前面一行" id="delFirstRow"/>
+		<input type="button" value="删除最后面一行" id="delLastRow"/>
+		<input type="button" value="在最前面增加一列" id="addFirstCol"/>
+		<input type="button" value="在最后面增加一列" id="addLastCol"/>
+		<input type="button" value="删除最前面一列" id="delFirstCol"/>
+		<input type="button" value="删除最后面一列" id="delLastCol"/>
+		<table id="tab"></table>
+		
+		<script>
+			var rowNum=document.getElementById("row");
+			var colNum=document.getElementById("col");
+			var btn=document.getElementById("btn");
+			var tab=document.getElementById("tab");
+			var addFirstRow=document.getElementById("addFirstRow");
+			var addLastRow=document.getElementById("addLastRow");
+			var delFirstRow=document.getElementById("delFirstRow");
+			var delLastRow=document.getElementById("delLastRow");
+			var addFirstcol=document.getElementById("addFirstcol");
+			var addLastcol=document.getElementById("addLastcol");
+			var delFirstcol=document.getElementById("delFirstcol");
+			var delLastCol=document.getElementById("delLastCol");
+			
+			btn.onclick=function(){
+				tab.innerHTML="";
+				for(var i=0;i<rowNum.value;i++){
+					var tr=document.createElement("tr");
+					var newTr=tab.appendChild(tr);
+					for(var j=0;j<colNum.value;j++){
+						var td=document.createElement("td");
+						var newTd=newTr.appendChild(td);
+						if(j==colNum.value-2){
+							newTd.innerHTML="删除";
+				  			newTd.onclick=function(){
+								this.parentNode.parentNode.removeChild(this.parentNode);
+							}
+						}
+						else if(j==colNum.value-1){
+							newTd.innerHTML="清空";
+							newTd.onclick=function(){
+								var tdNode=this.parentNode.children;
+								for(var k=0;k<tdNode.length;k++){
+									if(k==tdNode.length-1||k==tdNode.length-2)
+										return;
+									else
+										tdNode[k].innerHTML="";
+								}
+							}
+						}
+						else
+							newTd.innerHTML="行号"+(i+1)+"，列号"+(j+1);
+						newTd.style.background="rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";
+					}
+				}
+			}
+			
+			addFirstRow.onclick=function(){
+				if(!tab.childNodes){
+					var tr=document.createElement("tr");
+					var newTr=tab.appendChild(tr);
+					for(var j=0;j<colNum.value;j++){
+						var td=document.createElement("td");
+						var newTd=newTr.appendChild(td);
+						if(j==colNum.value-2){
+							newTd.innerHTML="删除";
+				  			newTd.onclick=function(){
+								this.parentNode.parentNode.removeChild(this.parentNode);
+							}
+						}
+						else if(j==colNum.value-1){
+							newTd.innerHTML="清空";
+							newTd.onclick=function(){
+								var tdNode=this.parentNode.children||this.parentNode.childNodes;
+								for(var k=0;k<tdNode.length;k++){
+									if(k==tdNode.length-1||k==tdNode.length-2)
+										return;
+									else
+										tdNode[k].innerHTML="";
+								}
+							}
+						}
+						else
+							newTd.innerHTML="行号1"+"，列号"+(j+1);
+						newTd.style.background="rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";
+					}
+				}	
+				else{
+					var tr=document.createElement("tr");
+					var newTr=tab.insertBefore(tr,tab.firstChild);
+					for(var j=0;j<colNum.value;j++){
+						var td=document.createElement("td");
+						var newTd=newTr.appendChild(td);
+						if(j==colNum.value-2){
+							newTd.innerHTML="删除";
+				  			newTd.onclick=function(){
+								this.parentNode.parentNode.removeChild(this.parentNode);
+							}
+						}
+						else if(j==colNum.value-1){
+							newTd.innerHTML="清空";
+							newTd.onclick=function(){
+								var tdNode=this.parentNode.childNodes||this.parentNode.children;
+								for(var k=0;k<tdNode.length;k++){
+									if(k==tdNode.length-1||k==tdNode.length-2)
+										return;
+									else
+										tdNode[k].innerHTML="";
+								}
+							}
+						}
+						else
+							newTd.innerHTML="行号，列号"+(j+1);
+						newTd.style.background="rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";
+					}
+				}
+			}
+			
+			addLastRow.onclick=function(){
+				var tr=document.createElement("tr");
+				var newTr=tab.appendChild(tr);
+				for(var j=0;j<colNum.value;j++){
+					var td=document.createElement("td");
+					var newTd=newTr.appendChild(td);
+					if(j==colNum.value-2){
+						newTd.innerHTML="删除";
+				  		newTd.onclick=function(){
+							this.parentNode.parentNode.removeChild(this.parentNode);
+						}
+					}
+					else if(j==colNum.value-1){
+						newTd.innerHTML="清空";
+						newTd.onclick=function(){
+							var tdNode=this.parentNode.children;
+							for(var k=0;k<tdNode.length;k++){
+								if(k==tdNode.length-1||k==tdNode.length-2)
+									return;
+								else
+									tdNode[k].innerHTML="";
+							}
+						}
+					}
+					else
+						newTd.innerHTML="行号，列号"+(j+1);
+					newTd.style.background="rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";
+				}
+			}
+			
+			delFirstRow.onclick=function(){
+				tab.removeChild(tab.firstChild);
+			}
+			
+			delLastRow.onclick=function(){
+				tab.removeChild(tab.lastChild);
+			}
+			
+			addFirstCol.onclick=function(){
+				var tr=document.getElementsByTagName("tr");
+				for(var i=0;i<tr.length;i++){
+					var td=document.createElement("td");
+					var newTd=tr[i].insertBefore(td,tr[i].firstChild);
+					newTd.innerHTML="行号，列号";
+					newTd.style.background="rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";
+				}
+			}
+			
+			addLastCol.onclick=function(){
+				var tr=document.getElementsByTagName("tr");
+				for(var i=0;i<tr.length;i++){
+					var td=document.createElement("td");
+					var newTd=tr[i].appendChild(td);
+					newTd.innerHTML="行号，列号";
+					newTd.style.background="rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";
+				}
+			}
+			
+			delFirstCol.onclick=function(){
+				var tr=document.getElementsByTagName("tr");
+				for(var i=0;i<tr.length;i++){
+					var newTd=tr[i].removeChild(tr[i].firstChild);
+				}
+			}
+			
+			delLastCol.onclick=function(){
+				var tr=document.getElementsByTagName("tr");
+				for(var i=0;i<tr.length;i++){
+					var newTd=tr[i].removeChild(tr[i].lastChild);
+				}
+			}
+			
+		</script>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原型</title>
+	</head>
+	<body>
+		<script>
+			function Person(name,age){
+				this.name=name;
+				this.age=age;
+				this.showName=function(){
+					alert(this.name);
+				}
+			}
+			Person.prototype.id=1234;
+			Person.prototype.sex="male";
+			Person.prototype.showAge=function(){
+				alert(this.age);
+			}
+			var person1=new Person("赵六",30);
+			person1.id=4567;
+			var person2=new Person("李四",10);
+			person1.showName();//"赵六"
+			person1.showAge();//30
+			person1.showAge=function(){
+				alert(100);
+			}
+			person1.showAge();//100
+			alert(person1.id);//1234
+			alert(person1.id);//4567
+			//判断原型的实例
+			alert(Person.prototype.isPrototypeOf(person2));//true
+			//获取对象原型。
+			console.log(Object.getPrototypeOf(person1));//==Person.prototype
+			//删除属性
+			delete person1.id;
+			alert(person1.id);//1234
+			alert(person1.hasOwnProperty("name"));//true
+			alert(person1.hasOwnProperty("id"));//false		(why???)
+			alert(person1.hasOwnProperty("sex"));//false
+			alert("id" in person1);//不分私有还是原型。存在就返回true
+			for(var arr in person1){
+				console.log(arr);//不分私有还是原型。存在就返回
+			}
+			console.log(Object.keys("name")); //["0", "1", "2", "3"]	(why???)
+			console.log(Object.keys("id"));//["0", "1"]
+		</script>
+	</body>
+</html>

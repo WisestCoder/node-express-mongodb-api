@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>文档片段DcumentFragment</title>
+		<style>
+			td{width:60px;height: 12px;background: red;border: 1px solid green;text-align: center;}
+		</style>
+	</head>
+	<body>
+		
+		<table id="tab">
+			
+		</table>
+		
+		<script>
+			setInterval(function(){
+				var tab=document.getElementById("tab");
+				tab.innerHTML="";
+				//DocumentFragment在文档中是没有对应标签的，它像是一个仓库,
+				//这也正于片段这两个字相符,我们可以将创建好的节点对象都先存放在这个仓库中，
+				//最终将这个仓库一并交给浏览器进行解析并重绘，这样可以提高DOM操作的性能
+				var fragment=document.createDocumentFragment();
+				for(var i=0;i<50;i++){
+					var trNew=document.createElement("tr");
+					for(var j=0;j<20;j++){
+						var tdNew=document.createElement("td");
+						trNew.appendChild(tdNew);
+						tdNew.style.background="rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";
+					}
+					fragment.appendChild(trNew);
+				}
+				tab.appendChild(fragment);
+			},100)
+		</script>
+	</body>
+</html>

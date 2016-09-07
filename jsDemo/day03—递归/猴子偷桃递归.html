@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>猴子吃桃</title>
+		<style>
+			input{height: 24px;}
+		</style>
+	</head>
+	<body>
+		请输入天数:<input type="text" value="" id="day" /><br />
+		<input type="button" value="确定" id="btn" onclick="result()" /><br />
+		桃子总数:<input type="text" value="" id="num" readonly="readonly"/>
+		
+		
+		<script>
+			var day=document.getElementById("day");
+			var num=document.getElementById("num");
+			function calcute(n){
+				if(n==1){
+					return 1;
+				}
+				else{
+					return 2*(calcute(n-1)+1);
+				}
+			}
+			function result(){
+				num.value=calcute(day.value);
+			}
+			
+			
+		</script>
+	</body>
+</html>

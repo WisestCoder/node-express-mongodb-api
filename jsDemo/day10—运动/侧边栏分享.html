@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>侧边栏分享</title>
+		<style>
+			*{margin: 0;padding: 0;}
+			li{list-style: none;height: 48px;line-height: 50px;text-align: center;border: 1px solid #B8860B;}
+			a{text-decoration: none;color: #3d3d3d;}
+			#divBox{width: 130px;height:200px;position: absolute;left: -100px;}
+			.div1{width:100px;height: 200px;background: #eee;float: left;}
+			#div2{width: 25px;height: 80px;background: darkgoldenrod;float: left;margin:60px 0 0 5px;text-align: center;line-height: 40px;color: #fff;font-size: 20px;}
+		</style>
+	</head>
+	<body>
+		<div id="divBox">
+			<div class="div1">
+				<ul>
+					<li><a href="#">侧边栏1</a></li>
+					<li><a href="#">侧边栏1</a></li>
+					<li><a href="#">侧边栏1</a></li>
+					<li><a href="#">侧边栏1</a></li>
+				</ul>
+			</div>
+			<div id="div2">分享</div>
+		</div>
+		
+		<script>
+			var divBox=document.getElementById("divBox");
+			var div2=document.getElementById("div2");
+			var timer;
+			var flag=true;
+			div2.onclick=function(){
+				clearInterval(timer);
+				if(flag){
+					timer=setInterval(function(){
+						if(divBox.offsetLeft+1>=5){
+							divBox.style.left="5px";
+							clearInterval(timer);
+							flag=false;
+						}
+						else{
+							divBox.style.left=divBox.offsetLeft+1+"px";
+						}
+					},2);
+				}
+				else{
+					timer=setInterval(function(e){
+						if(divBox.offsetLeft-1<=-100){
+							divBox.style.left="-100px";
+							clearInterval(timer);
+							flag=true;
+						}
+						else{
+							divBox.style.left=divBox.offsetLeft-1+"px";
+						}
+					},2);
+				}
+			}
+		</script>
+		
+	</body>
+</html>

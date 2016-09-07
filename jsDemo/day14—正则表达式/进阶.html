@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>进阶</title>
+	</head>
+	<body>
+		<script>
+			//检查邮政编码，共 6 位数字，第一位不能为 0
+			var reg1=new RegExp("^[1-9][0-9]{5}$");
+			var result1=reg1.test("504897");
+			dw("1: "+result1);
+			
+			//检查文件压缩包 
+			var reg2=new RegExp("^.*\.zip$");
+			var result2=reg2.test("好压.zip");
+			dw("2: "+result2);
+			
+			//电子邮件
+			var reg3=new RegExp("^[a-z0-9]$");
+			var result3=reg3.test("");
+			dw("3: "+result3);
+			
+			//只能输入小数
+			var reg4=new RegExp("^(0|[1-9][0-9]*).[0-9]*[1-9][0-9]*$");//0.000不算小数
+			var result4=reg4.test("54.000001");
+			dw("4: "+result4);
+			
+			//只能输入2位小数
+			var reg5=new RegExp("^(0|[1-9][0-9]*)[.](([0-9][1-9])|([1-9][0-9]))$");	
+			var result5=reg5.test("54489023.44");
+			dw("5: "+result5);
+			
+			function dw(parma){
+				document.write(parma);
+				document.write("<br />");
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>放大镜显示</title>
+		<style>
+			#big{width: 400px;height: 400px;position: absolute;top: 0;left: 0;display: none;}
+		</style>
+		<script src="eventList.js"></script>
+	</head>
+	<body>
+		<img src="img/shirt_1.jpg" />
+		<img src="img/shirt_2.jpg" />
+		<img src="img/shirt_3.jpg" />
+		<img src="img/shirt_4.jpg" />
+		<div id="big">
+		</div>
+		
+		
+		<script>
+			var img=document.getElementsByTagName("img");
+			var div=document.getElementById("big");
+			
+			for(var i=0;i<img.length;i++){
+				img[i].index=i;
+				img[i].onmouseover=function(event){
+					var event=eventUtil.getEvent(event);
+					div.style.top=event.clientY+"px";
+					div.style.left=event.clientX+"px";
+					div.style.background="url("+this.src.replace(".jpg","_big.jpg")+")";	
+					div.style.display="block";
+					document.onmousemove=function(event){
+						var event=eventUtil.getEvent(event);
+						div.style.top=event.clientY+5+"px";
+						div.style.left=event.clientX+5+"px";
+					}
+				}
+				img[i].onmouseout=function(event){
+					div.style.display="none";
+				}
+				
+			}
+			
+		</script>
+		
+	</body>
+</html>

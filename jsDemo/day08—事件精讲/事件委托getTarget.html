@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>事件委托getTarget</title>
+		<style>
+		td{height: 30px;font-size: 20px;}
+		input{height: 30px;}
+		</style>
+		<script src="eventList.js"></script>
+	</head>
+	<body>
+		<table border="1" id="tab">
+			<tr>
+				<td>邝光前傻逼</td>
+				<td>邝光前傻屌</td>
+				<td>邝光前吃药了</td>
+			</tr>
+			<tr>
+				<td>邝光前傻逼</td>
+				<td>邝光前傻屌</td>
+				<td>邝光前吃药了</td>
+			</tr>
+			<tr>
+				<td>邝光前傻逼</td>
+				<td>邝光前傻屌</td>
+				<td>邝光前吃药了</td>
+			</tr>
+		</table>
+		
+		<script>
+				var tab=document.getElementById("tab")
+				tab.onclick=function(event){
+					var event=eventUtil.getEvent(event);
+					var inputNew=document.createElement("input");
+					inputNew.type="text"
+					inputNew.value=eventUtil.getTarget(event).innerHTML;
+					eventUtil.getTarget(event).innerHTML="";
+					eventUtil.getTarget(event).appendChild(inputNew);
+					inputNew.focus();
+					inputNew.onclick=function(event){
+						var event=eventUtil.getEvent(event);
+						eventUtil.stopPropagation(event);
+					}
+					inputNew.onblur=function(){
+						var str=this.value;
+						this.parentNode.innerHTML=str;
+					}
+				}
+		</script>
+	</body>
+</html>

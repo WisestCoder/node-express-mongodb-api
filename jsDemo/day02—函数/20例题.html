@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <script>
+        document.write("例1："+"<br />");
+        for(var i=0;i<3;i++){
+            document.write("**********"+"<br />");
+        }
+        document.write("<br />");
+
+
+        document.write("例2："+"<br />");
+        for(var i=0;i<4;i++){
+            for(var j=0;j<=i;j++) {
+                document.write("*");
+            }
+            document.write("<br />");
+        }
+        document.write("<br />");
+
+
+        document.write("例3："+"<br />");
+        for(var i=4;i>0;i--){
+            for(var j=0;j<i;j++) {
+                document.write("*");
+            }
+            document.write("<br />");
+        }
+        document.write("<br />");
+
+
+        document.write("例4："+"<br />");
+        for(var i=0;i<5;i++) {
+            for (var j =4; j >i; j--) {
+                document.write("&ensp;");
+            }
+            for(var k=0;k<=i;k++){
+                document.write("*");
+            }
+            document.write("<br />");
+        }
+
+
+        document.write("例5："+"<br />");
+        for(var i=0;i<7;i+=2) {
+            for (var j =((6-i)/2); j >0; j--) {
+                document.write("&ensp;");
+            }
+            for(var k=0;k<=i;k++){
+                document.write("*");
+            }
+            for (var j =((6-i)/2); j >0; j--) {
+                document.write("&ensp;");
+            }
+            document.write("<br />");
+        }
+
+
+        document.write("例6："+"<br />");
+        for(var i=0;i<7;i+=2) {
+            for (var j =0; j <i/2; j++) {
+                document.write("&ensp;");
+            }
+            for(var k=0;k<=(6-i);k++){
+                document.write("*");
+            }
+            for (var j =0; j < i/2; j++) {
+                document.write("&ensp;");
+            }
+            document.write("<br />");
+        }
+
+
+        document.write("例7："+"<br />");
+        for(var i=0;i<9;i+=2) {
+            if(i<5){
+                for (var j =((8-i)/2); j >0; j--) {
+                    document.write("&ensp;");
+                }
+                for(var k=0;k<=i;k++){
+                    document.write("*");
+                }
+                for (var j =((8-i)/2); j >0; j--) {
+                    document.write("&ensp;");
+                }
+                document.write("<br />");
+            }
+            else{
+                for (var l =0; l <i/2; l++) {
+                    document.write("&ensp;");
+                }
+                for(var m=0;m<=(8-i);m++){
+                    document.write("*");
+                }
+                for (var n =0;n < i/2; n++) {
+                    document.write("&ensp;");
+                }
+                document.write("<br />");
+            }
+        }
+
+
+        document.write("例8："+"<br />");
+        var salay=2000.0;
+        for(var i=25;i<55;i++){
+            salay*=(1+0.05);
+        }
+        document.write("这个小伙子到退休时(55岁)的月工资是:"+salay+"元");
+        document.write("<br />");
+
+
+        document.write("例9："+"<br />");
+        document.write( "100–200之间所有能被3或者7整除的数为：");
+        for(var i=101;i<200;i++){
+            if(i%3==0||i%5==0){
+                document.write(i+" ");
+            }
+        }
+        document.write("<br />");
+
+
+        document.write("例10："+"<br />");
+        document.write( "100的阶乘为：");
+        var sum1=1;
+        for(var i=100;i>=1;i--){
+            sum1*=i;
+        }
+        document.write(sum1);
+        document.write("<br />");
+
+
+        document.write("例11："+"<br />");
+        document.write( "1+3+5+...+99的和为：");
+        var sum2=0;
+        for(var i=1;i<=99;i+=2){
+            sum2+=i;
+        }
+        document.write(sum2);
+        document.write("<br />");
+
+
+        document.write("例12："+"<br />");
+        document.write( "九九乘法表：");
+        document.write("<br />");
+        for(var i=1;i<=9;i++){
+            for(var j=1;j<=i;j++){
+                document.write(j+"*"+i+"="+j*i+"&ensp;");
+            }
+            document.write("<br />");
+        }
+
+
+        document.write("例13："+"<br />");
+        document.write( "所有满足下列条件的四位整数.条件:个位数字加百位数字等于千位数字加上十位数字,且该四位数为奇数为："+"<br />");
+        for(i=1000;i<=9999;i++){
+            var qian=parseInt(i/1000);
+            var bai=parseInt((i-qian*1000)/100);
+            var shi=parseInt((i-qian*1000-bai*100)/10);
+            var ge=parseInt((i-qian*1000-bai*100-shi*10));
+            if(i%2==1){
+                if((bai+ge)==(qian+shi)){
+                    document.write(i+" ");
+                }
+            }
+        }
+        document.write("<br />");
+
+
+        document.write("例14："+"<br />");
+        document.write("100-999之间的水仙花数为："+"<br />");
+        for(var i=100;i<=999;i++){
+            var a=parseInt(i/100);
+            var b=parseInt((i-a*100)/10);
+            var c=parseInt(i-a*100-b*10);
+            if((a*a*a+b*b*b+c*c*c)==i){
+                document.write(i+" ");
+            }
+        }
+        document.write("<br />");
+
+
+        document.write("例15："+"<br />");
+        document.write("买鸡问题："+"<br />");
+        for(var i=1;i<20;i++){
+            for(var j=1;j<33;j++){
+                for(var k=1;k<100;k++){
+                    if((parseFloat(5*i)+parseFloat(3*j)+parseFloat(k/3)==100)&&(i+j+k==100)){
+                        document.write("公鸡："+i+"只,"+"母鸡："+j+"只,"+"小鸡："+k+"只,"+"<br />");
+                    }
+                }
+            }
+        }
+
+
+        document.write("例16："+"<br />");
+        document.write("1-100里所有的偶数为："+"<br />");
+        for(var i=1;i<=100;i++){
+            if(i%2==0){
+                document.write(i+" ");
+            }
+        }
+        document.write("<br />");
+
+
+        document.write("例17："+"<br />");
+        document.write("1-100里所有的奇数为："+"<br />");
+        for(var i=1;i<=100;i++){
+            if(i%2==1){
+                document.write(i+" ");
+            }
+        }
+        document.write("<br />");
+
+
+        document.write("例18："+"<br />");
+        document.write("1-1/2+1/3-1/4…..1/100的和为："+"<br />");
+        var sum3=1;
+        for(var i=1;i<100;i++){
+            sum3+=1*Math.pow(-1,i)/(i+1);
+        }
+        document.write(sum3);
+        document.write("<br />");
+
+
+        document.write("例19："+"<br />");
+        document.write("20-80之间能被3整除的整数，每5个一行为：");
+        var k=0;
+        for(var i=20;i<=80;i++){
+            if(i%3==0){
+                k++;
+                document.write(i+" ");
+            }
+            if(k%6==0){
+                k++;
+                document.write("<br />");
+            }
+        }
+        document.write("<br />");
+
+
+        document.write("例20："+"<br />");
+        document.write("1000-2000年中所有的闰年，并以每行四个数的形式输出为:");
+        var bool=false;
+        var k=0;
+        for(var i=1000;i<=2000;i++){
+            bool=false;
+            if(i%4==0){
+                bool=true;
+            }
+            if(i%100==0){
+                bool=false;
+            }
+            if(i%400==0){
+                bool=true;
+            }
+            if(bool==true){
+                document.write(i+" ");
+                k++;
+            }
+            if(k%5==0){
+                k++;
+                document.write("<br />");
+            }
+        }
+
+
+
+    </script>
+</body>
+</html>

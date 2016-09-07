@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="divBox">
+			<div id="div1">
+				<p id="p1"></p>
+				<p id="p2"></p>
+				<p id="p3"></p>
+			</div>
+			<div id="div2"></div>
+			<div id="div3"></div>
+		</div>
+		
+		
+		<script>
+			var everyDom=document.getElementsByTagName("*");
+			var arr=[];
+			for(var i=0;i<everyDom.length;i++){
+				if(everyDom[i].nodeType==1){
+					console.log(everyDom[i].nodeName+" "+everyDom[i].id);
+					arr.push(everyDom[i]);
+				}
+			}
+		</script>
+		
+		
+		
+		
+		
+		
+	</body>
+</html>

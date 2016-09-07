@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		</style>
+	</head>
+	<body>
+		<img src="图片轮播/images/timu.bmp"  /><br />
+		<script>
+			var animals1=["dog","cat","sea1","walrus","lion","cat"];
+			animals1.splice(3,1);
+			animals1.splice(1,1,"moneky");
+			document.write(animals1+"<br />");
+			
+			var animals2=["dog","cat","sea1","walrus","lion","cat"];
+			for(var i=0;i<animals2.length;i++){
+				animals2[i]+="s";
+			}
+			document.write(animals2+"<br />");
+			
+			var animals3=["dog","cat","sea1","walrus","lion","cat"];
+			for(var i=0;i<animals3.length-1;i++){
+				var same=0;
+				for(var j=i+1;j<animals3.length;j++){
+					if(animals3[i]==animals3[j]){
+						animals3.splice(j,1);
+						j--;
+						same++;
+					}
+				}
+				if(same>0){
+					document.write("重复数据:"+animals3[i]+"   ");
+					document.write("重复次数:"+same+"<br />");
+				}
+			}
+			document.write(animals3+"<br />");
+		</script>
+	</body>
+</html>

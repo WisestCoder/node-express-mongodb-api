@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{width: 100px;height: 100px;position: absolute;top: 0;left: 0;background: red;}
+		</style>
+		<script src="eventList.js"></script>
+	</head>
+	<body>
+		<div id="div"></div>
+		
+		<script>
+			var div=document.getElementById("div");
+			document.onmousedown=function(event){
+				var event=eventUtil.getEvent(event);
+				div.style.top=(event.clientY-50)+"px";
+				div.style.left=(event.clientX-50)+"px";
+				document.body.onmousemove=function(event){
+				var event=eventUtil.getEvent(event);
+				eventUtil.getTarget(event).style.top=(event.clientY-50)+"px";
+				eventUtil.getTarget(event).style.left=(event.clientX-50)+"px";
+				}
+			}
+			document.onmouseup=function(event){
+				if(event.clientY-50<50){
+					div.style.top=0;
+				}else if(event.clientY+50>document.documentElement.clientHeight-50){
+					div.style.top=document.documentElement.clientHeight-100+"px";
+				}
+				if(event.clientX-50<50){
+					div.style.left=0;
+				}else if(event.clientX+50>document.documentElement.clientWidth-50){
+					div.style.left=document.documentElement.clientWidth-100+"px";
+				}
+				//alert(eventUtil.getTarget(event).style.top+"   "+eventUtil.getTarget(event).style.left);
+				document.body.onmousemove=null;
+			}
+			
+		</script>
+	</body>
+</html>

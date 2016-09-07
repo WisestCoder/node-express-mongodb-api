@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>对象常量</title>
+	</head>
+	<body>
+		<script>
+			const co={
+				name:"zhangsan",
+				age:20,
+				coo:{
+					name:"lisi",
+					age:30
+				}
+			}
+			co.index=1;
+			alert(co.index);   //1(创建出index,值为1)
+			Object.freeze(co);
+			co.index1=10;   
+			alert(co.index1);   //undefined(没有创建出index1属性)
+			co.index=5;
+			alert(co.index);   //1(值没有被修改)
+			co.coo.index2=100;
+			alert(co.coo.index2);   //100(index2可以被创建,并且值为100,说明freeze方法只能冻结它自己下面的属性)
+		</script>
+	</body>
+</html>

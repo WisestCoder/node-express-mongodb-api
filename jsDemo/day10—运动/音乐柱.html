@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{width: 50px;height: 50px;position: absolute;text-align: center;font-size: 20px;line-height: 50px;}
+			#div1{top: 500px;left: 150px;background: #50B6BA;}
+			#div2{top: 500px;left: 220px;background: #B8860B;}
+			#div3{top: 500px;left: 290px;background: #E4393C;}
+		</style>
+	</head>
+	<body>
+		<div id="div1">A</div>
+		<div id="div2">B</div>
+		<div id="div3">C</div>
+		
+		<script>
+			
+			var div1=document.getElementById("div1");
+			var div2=document.getElementById("div2");
+			var div3=document.getElementById("div3");
+			var timer1;
+			var timer2;
+			var timer3;
+			
+			document.onkeydown=function(e){
+				var e=e||window.event;
+				switch(e.keyCode){
+					case 65:
+						srartA();
+						break;
+					case 66:
+						srartB();
+						break;
+					case 67:
+						srartC();
+						break;
+				}
+			}
+			
+			function srartA(){
+				clearInterval(timer1);
+				var flag=false;
+				timer1=setInterval(function(){
+					if(flag){
+						if(div1.offsetTop>=500){
+							clearInterval(timer1);
+						}
+						else{
+							div1.style.top=div1.offsetTop+10+"px";
+							div1.style.height=div1.offsetHeight-10+"px";
+						}
+					}
+					else{
+						if(div1.offsetTop<=300){
+							flag=true;
+						}
+						else{
+							div1.style.top=div1.offsetTop-10+"px";
+							div1.style.height=div1.offsetHeight+10+"px";
+						}
+					}
+				},30);
+			}
+			function srartB(){
+				clearInterval(timer2);
+				var flag=false;
+				timer2=setInterval(function(){
+					if(flag){
+						if(div2.offsetTop>=500){
+							clearInterval(timer2);
+						}
+						else{
+							div2.style.top=div2.offsetTop+10+"px";
+							div2.style.height=div2.offsetHeight-10+"px";
+						}
+					}
+					else{
+						if(div2.offsetTop<=350){
+							flag=true;
+						}
+						else{
+							div2.style.top=div2.offsetTop-10+"px";
+							div2.style.height=div2.offsetHeight+10+"px";
+						}
+					}
+				},30);
+			}
+			
+			function srartC(){
+				clearInterval(timer3);
+				var count=1;
+				timer3=setInterval(function(){
+					if(count==6){
+						if(div3.offsetTop>=500){
+						clearInterval(timer3);
+						}
+						else{
+							div3.style.top=div3.offsetTop+10+"px";
+							div3.style.height=div3.offsetHeight-10+"px";
+						}
+					}
+					else if(count==5){
+						if(div3.offsetTop<=360){
+							count=6;
+						}
+						else{
+							div3.style.top=div3.offsetTop-10+"px";
+							div3.style.height=div3.offsetHeight+10+"px";
+						}
+					}
+					else if(count==4){
+						if(div3.offsetTop>=500){
+							count=5;
+						}
+						else{
+							div3.style.top=div3.offsetTop+10+"px";
+							div3.style.height=div3.offsetHeight-10+"px";
+						}
+					}
+					else if(count==3){
+						if(div3.offsetTop<=280){
+							count=4;
+						}
+						else{
+							div3.style.top=div3.offsetTop-10+"px";
+							div3.style.height=div3.offsetHeight+10+"px";
+						}
+					}
+					else if(count==2){
+						if(div3.offsetTop>=500){
+							count=3;
+						}
+						else{
+							div3.style.top=div3.offsetTop+10+"px";
+							div3.style.height=div3.offsetHeight-10+"px";
+						}
+					}
+					else if(count==1){
+						if(div3.offsetTop<=200){
+							count=2;
+						}
+						else{
+							div3.style.top=div3.offsetTop-10+"px";
+							div3.style.height=div3.offsetHeight+10+"px";
+						}
+					}
+				},30);
+			}
+			
+		</script>
+		
+	</body>
+</html>
