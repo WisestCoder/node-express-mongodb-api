@@ -1,4 +1,4 @@
-# 使用Node、Express 和MongoDB (mongoose)快速开发API接口
+# 使用Node、Express 和MongoDB快速开发API接口
 本教程介绍如何使用Node.js 、Express 和MongoDB (mongoose) 创建REST服务，快速开发API接口
 
 ###1、安装NodeJs
