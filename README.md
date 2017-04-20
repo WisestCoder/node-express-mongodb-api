@@ -74,4 +74,4 @@ MongoDB是一个面向文档的NoSQL数据库（可用于处理大数据）。�
 		http://localhost:3000/user/selectAll——>http://localhost:3000/good/selectAll
 	11、  .....
 
-当你发现你的接口已经成功运行，并且完美无误，那么恭喜！你现在已经是一个全栈开发者了！
+当你发现你的接口已经成功运行，并且完美无误，那么恭喜！
