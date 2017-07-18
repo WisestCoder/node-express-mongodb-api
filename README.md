@@ -1,7 +1,7 @@
 # 使用Node、Express 和MongoDB快速开发API接口
 本教程介绍如何使用Node.js 、Express 和MongoDB (mongoose) 创建REST服务，快速开发API接口
 
-###1、安装NodeJs
+### 1、安装NodeJs
 安装NodeJS，可以访问[NodeJS官方网站](https://nodejs.org/en/)。或者[NodeJs中文网](www.nodejs.cn/)下载
 
 检查版本
@@ -9,7 +9,7 @@
 	node --version
 	# => 4.12.4
 
-###2、安装ExpressJs
+### 2、安装ExpressJs
 ExpressJS是运行在NodeJS上的Web应用框架。它可以用于构建Web应用或API服务（后文详述）。
 
 	npm install -g express
@@ -21,12 +21,12 @@ ExpressJS是运行在NodeJS上的Web应用框架。它可以用于构建Web应�
 	express --version
 	# => 4.12.4
 
-###3、安装MongoDB
+### 3、安装MongoDB
 MongoDB是一个面向文档的NoSQL数据库（可用于处理大数据）。它将数据以JSON格式存储，允许执行类似SQL的查询。你可以访问[mongoDB官网](https://www.mongodb.com/)下载
 
 安装完mongodb之后 你可以打开安装目录下的`bin`目录，打开`mongod.exe`启动mongodb服务
 
-###4、快速开发API接口
+### 4、快速开发API接口
 
 当确保你安装完以上软件并且能够成功运行之后，你可以将代码克隆至本地
 
