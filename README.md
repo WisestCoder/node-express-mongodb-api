@@ -24,15 +24,13 @@ ExpressJS是运行在NodeJS上的Web应用框架。它可以用于构建Web应�
 ### 3、安装MongoDB
 MongoDB是一个面向文档的NoSQL数据库（可用于处理大数据）。它将数据以JSON格式存储，允许执行类似SQL的查询。你可以访问[mongoDB官网](https://www.mongodb.com/)下载
 
-安装完mongodb之后 你可以打开安装目录下的`bin`目录，打开`mongod.exe`启动mongodb服务
+安装完mongodb之后 你启动mongodb服务
 
 ### 4、快速开发API接口
 
 当确保你安装完以上软件并且能够成功运行之后，你可以将代码克隆至本地
 
-    git clone https://github.com/dushao103500/angular-project-api.git
-
-此时，你应该先启动mongodb的服务，打开安装目录下的`bin`目录，打开`mongod.exe`启动mongodb服务
+    git clone https://github.com/WisestCoder/angular-project-api.git
 
 然后在angular-project-api目录下输入命令
 
@@ -57,13 +55,13 @@ MongoDB是一个面向文档的NoSQL数据库（可用于处理大数据）。�
 	2、按用户名查找用户(后接用户名)
 		http://localhost:3000/user/getByUsername?username=
 	3、按用户类型查找用户(后接用户类型)
-			http://localhost:3000/user/getByType?type=
+		http://localhost:3000/user/getByType?type=
 	4、插入用户信息(后接一个json数据)
 		http://localhost:3000/user/insert?data=
 	5、按用户名删除用户(后接用户名)
 		http://localhost:3000//user/delectByUsername?username=
 	6、按用户类型删除用户(后接用户类型)
-			http://localhost:3000/user/delectByType?type=
+		http://localhost:3000/user/delectByType?type=
 	7、全部删除
 		http://localhost:3000/user/delectAll
 	8、更新用户信息(后接数组，前为查找的依据，如{'username':'001'},后为新信息,如{'username':'002','password':'12345'})
